@@ -1,0 +1,196 @@
+{
+  "version": "0.1.0",
+  "profile": {
+    "name": "陈亦舟",
+    "phone": "138-0000-0000",
+    "email": "demo@example.com"
+  },
+  "experiences": [
+    {
+      "id": "fin-exp-1",
+      "title": "示例证券研究所 · 行业研究实习生",
+      "category": "internship",
+      "role": "行业研究实习生",
+      "start_date": "2025-07",
+      "end_date": "2025-12",
+      "facts": [
+        "跟踪 3 家消费公司财报与经营数据",
+        "维护 200+ 条行业数据库",
+        "搭建 DCF 与可比公司估值模型",
+        "撰写 2 篇行业跟踪报告"
+      ],
+      "actions": [
+        "跟踪财报与经营数据",
+        "维护行业数据库",
+        "搭建估值模型",
+        "撰写行业报告"
+      ],
+      "results": [
+        "2 篇报告被团队采用",
+        "覆盖 3 家公司"
+      ],
+      "ability_hypotheses": [
+        "财务分析与估值",
+        "行业研究"
+      ],
+      "verification_status": "verified",
+      "source_refs": [
+        "demo"
+      ],
+      "open_questions": []
+    },
+    {
+      "id": "fin-exp-2",
+      "title": "示例消费基金 · 研究助理",
+      "category": "internship",
+      "role": "研究助理",
+      "start_date": "2026-01",
+      "end_date": "2026-05",
+      "facts": [
+        "整理 50 家可比公司数据",
+        "参与 10 场专家访谈并整理纪要",
+        "输出 1 份赛道复盘"
+      ],
+      "actions": [
+        "整理可比公司数据",
+        "参与专家访谈",
+        "输出赛道复盘"
+      ],
+      "results": [
+        "1 份复盘进入组合讨论"
+      ],
+      "ability_hypotheses": [
+        "行业研究",
+        "专家访谈"
+      ],
+      "verification_status": "verified",
+      "source_refs": [
+        "demo"
+      ],
+      "open_questions": []
+    }
+  ],
+  "star_statements": [
+    {
+      "id": "fin-star-1",
+      "experience_id": "fin-exp-1",
+      "ability": "财务分析与估值",
+      "situation": "覆盖消费行业",
+      "task": "给出估值判断",
+      "action": "搭建 DCF 与可比公司模型，跟踪 3 家公司财报",
+      "result": "输出估值区间与关键假设",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "fin-star-2",
+      "experience_id": "fin-exp-1",
+      "ability": "行业研究",
+      "situation": "行业跟踪",
+      "task": "撰写跟踪报告",
+      "action": "维护 200+ 条行业数据库，整理供需与竞争格局",
+      "result": "2 篇报告被团队采用",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "fin-star-3",
+      "experience_id": "fin-exp-2",
+      "ability": "行业研究",
+      "situation": "赛道复盘",
+      "task": "提炼关键信号",
+      "action": "参与 10 场专家访谈并整理纪要",
+      "result": "输出 1 份赛道复盘",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    }
+  ],
+  "abilities": [
+    {
+      "id": "fin-ab-1",
+      "label": "财务分析与估值",
+      "description": "财报分析、DCF 与可比公司估值",
+      "star_statement_refs": [
+        "fin-star-1"
+      ]
+    },
+    {
+      "id": "fin-ab-2",
+      "label": "行业研究",
+      "description": "行业数据、竞争格局与专家访谈",
+      "star_statement_refs": [
+        "fin-star-2",
+        "fin-star-3"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "示例财经大学",
+      "major": "金融学",
+      "degree": "硕士",
+      "start_date": "2024-09",
+      "end_date": "2027-06",
+      "gpa": 3.9,
+      "gpa_scale": 4.0,
+      "rank": "前 5%",
+      "courses": [
+        {
+          "name": "公司金融",
+          "grade": "A"
+        },
+        {
+          "name": "投资学",
+          "grade": "A"
+        },
+        {
+          "name": "计量经济学",
+          "grade": "A-"
+        }
+      ],
+      "english": [
+        {
+          "name": "CET-6",
+          "score": 610
+        }
+      ],
+      "note": ""
+    }
+  ],
+  "honors": [
+    {
+      "title": "校级一等奖学金",
+      "year": "2025",
+      "level": "校级",
+      "detail": "前 5%"
+    },
+    {
+      "title": "校级案例大赛",
+      "year": "2024",
+      "level": "校级",
+      "detail": "二等奖"
+    }
+  ],
+  "skills": [
+    {
+      "category": "数据终端",
+      "items": [
+        "Wind",
+        "Excel（数据透视表）"
+      ]
+    },
+    {
+      "category": "编程与建模",
+      "items": [
+        "Python（pandas）",
+        "DCF / 可比公司估值"
+      ]
+    }
+  ]
+}

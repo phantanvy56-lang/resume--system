@@ -1,0 +1,181 @@
+{
+  "id": "finance-render",
+  "job_title": "行业研究实习生",
+  "company": "示例证券",
+  "availability": "每周到岗 4 天，可连续实习 3 个月以上",
+  "jd_text": "行业研究实习生（示例证券，虚构）\n\n岗位职责\n1. 跟踪重点公司财报与经营情况，整理行业与公司基础数据；\n2. 协助行业与个股基本面研究，参与估值与报告撰写。\n\n任职要求\n1. 研究生在读，金融相关专业；\n2. 具备基础的行业与公司分析能力，熟练使用 Wind/Excel；\n3. 每周至少出勤 3 天，可连续实习 3 个月以上。\n",
+  "requirements": [
+    {
+      "requirement": "跟踪财报与经营情况",
+      "category": "必备"
+    },
+    {
+      "requirement": "行业与公司基础数据整理",
+      "category": "必备"
+    },
+    {
+      "requirement": "协助基本面研究",
+      "category": "必备"
+    }
+  ],
+  "matches": [
+    {
+      "requirement": "跟踪财报与经营情况",
+      "ability_id": "fin-ab-1",
+      "ability_label": "财务分析与估值",
+      "star_statement_ids": [
+        "fin-star-1"
+      ],
+      "match_level": "强",
+      "reason": "实习中持续跟踪 3 家公司财报并搭建估值模型"
+    },
+    {
+      "requirement": "行业与公司基础数据整理",
+      "ability_id": "fin-ab-2",
+      "ability_label": "行业研究",
+      "star_statement_ids": [
+        "fin-star-2"
+      ],
+      "match_level": "强",
+      "reason": "维护 200+ 条行业数据库并撰写跟踪报告"
+    },
+    {
+      "requirement": "协助基本面研究",
+      "ability_id": "fin-ab-2",
+      "ability_label": "行业研究",
+      "star_statement_ids": [
+        "fin-star-3"
+      ],
+      "match_level": "中",
+      "reason": "通过 10 场专家访谈支撑赛道复盘"
+    }
+  ],
+  "selected_experience_ids": [
+    "fin-exp-1",
+    "fin-exp-2"
+  ],
+  "experience_rank": [
+    {
+      "experience_id": "fin-exp-1",
+      "rank": 1
+    },
+    {
+      "experience_id": "fin-exp-2",
+      "rank": 2
+    }
+  ],
+  "gaps": [],
+  "greeting": "您好，示例财经大学金融学硕士在读；每周可到岗 4 天、可连续实习 3 个月以上。\n岗位要的财务分析与估值、行业研究、数据整理，这三块我都在实习里做过。\n简历发您，方便的话看一眼，感谢！",
+  "preferences": {},
+  "status": "draft",
+  "versions": [
+    {
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00+08:00",
+      "changes": "demo",
+      "resume_json": {
+        "header": {
+          "job_title": "行业研究实习生",
+          "availability": "每周到岗 4 天，可连续实习 3 个月以上"
+        },
+        "education": {
+          "schools": [
+            {
+              "start": "2024-09",
+              "end": "2027-06",
+              "school": "示例财经大学",
+              "college": "金融学",
+              "degree": "硕士",
+              "note": ""
+            }
+          ],
+          "fields": [
+            {
+              "label": "专业成绩",
+              "text": "GPA 3.9/4.0，前 5%"
+            },
+            {
+              "label": "主修课程",
+              "text": "公司金融（A）、投资学（A）、计量经济学（A-）"
+            },
+            {
+              "label": "荣誉奖项",
+              "text": "校级一等奖学金（前 5%）；校级案例大赛（二等奖）"
+            }
+          ]
+        },
+        "sections": [
+          {
+            "title": "实习经历",
+            "experiences": [
+              {
+                "experience_id": "fin-exp-1",
+                "bullets": [
+                  {
+                    "label": "财务分析与估值",
+                    "desc": "搭建 DCF 与可比公司估值模型，跟踪 3 家消费公司财报与经营数据；输出估值区间与关键假设，支撑团队投资判断。",
+                    "bold": [
+                      "DCF",
+                      "3 家",
+                      "估值区间"
+                    ]
+                  },
+                  {
+                    "label": "行业数据与报告",
+                    "desc": "维护 200+ 条行业数据库，整理 2 篇行业跟踪报告；覆盖供需、竞争格局与政策变化，为组合调整提供依据。",
+                    "bold": [
+                      "200+ 条",
+                      "2 篇"
+                    ]
+                  }
+                ]
+              },
+              {
+                "experience_id": "fin-exp-2",
+                "bullets": [
+                  {
+                    "label": "专家访谈与复盘",
+                    "desc": "参与 10 场专家访谈并整理纪要，提炼渠道与库存关键信号；输出 1 份赛道复盘，支撑持仓讨论。",
+                    "bold": [
+                      "10 场",
+                      "1 份"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "abilities": [
+          {
+            "label": "财务与估值",
+            "text": "熟练使用 Wind、Excel 搭建 DCF 与可比公司估值模型，能跟踪财报与经营数据并输出估值判断。",
+            "bold": [
+              "Wind",
+              "DCF",
+              "估值判断"
+            ]
+          },
+          {
+            "label": "行业研究",
+            "text": "能维护行业数据库、整理竞争格局，并通过专家访谈提炼渠道与库存信号。",
+            "bold": [
+              "行业数据库",
+              "专家访谈"
+            ]
+          },
+          {
+            "label": "语言能力",
+            "text": "CET-6 610 分，可阅读英文财报、研报与行业资料。",
+            "bold": [
+              "英文财报"
+            ]
+          }
+        ]
+      },
+      "analysis_md": "# 行业研究实习生 · demo\n"
+    }
+  ],
+  "created_at": "2026-01-01T00:00:00+08:00",
+  "updated_at": "2026-01-01T00:00:00+08:00"
+}

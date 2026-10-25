@@ -1,0 +1,189 @@
+{
+  "id": "data-render",
+  "job_title": "数据分析实习生",
+  "company": "示例保险科技",
+  "availability": "每周到岗 4 天，可连续实习 3 个月以上",
+  "jd_text": "数据分析实习生（示例保险科技，虚构）\n\n主要职责\n1. 负责外部风控数据源的测试、接入与上线后运营；\n2. 基于产品形态与人群特征制定并优化风控策略；\n3. 承保前后风险追踪，监控转化指标与风险表现，输出异常预警与解读。\n\n岗位要求\n1. 本科及以上在读，数学、统计、经济、金融等相关专业；\n2. 熟练使用 Excel、SQL，具备数据敏感性；\n3. 每周可实习 4 天及以上优先。\n",
+  "requirements": [
+    {
+      "requirement": "风控数据源测试与运营",
+      "category": "必备"
+    },
+    {
+      "requirement": "风控策略制定与优化",
+      "category": "必备"
+    },
+    {
+      "requirement": "指标监控与异常解读",
+      "category": "必备"
+    }
+  ],
+  "matches": [
+    {
+      "requirement": "风控数据源测试与运营",
+      "ability_id": "data-ab-1",
+      "ability_label": "SQL 与指标",
+      "star_statement_ids": [
+        "data-star-1"
+      ],
+      "match_level": "强",
+      "reason": "清洗 10 万+ 条保单数据并搭建风控指标看板"
+    },
+    {
+      "requirement": "风控策略制定与优化",
+      "ability_id": "data-ab-2",
+      "ability_label": "统计建模",
+      "star_statement_ids": [
+        "data-star-2"
+      ],
+      "match_level": "强",
+      "reason": "设计 AB 测试并验证策略效果"
+    },
+    {
+      "requirement": "指标监控与异常解读",
+      "ability_id": "data-ab-3",
+      "ability_label": "业务分析",
+      "star_statement_ids": [
+        "data-star-2"
+      ],
+      "match_level": "中",
+      "reason": "从指标异常出发做归因并输出复盘"
+    }
+  ],
+  "selected_experience_ids": [
+    "data-exp-1",
+    "data-exp-2"
+  ],
+  "experience_rank": [
+    {
+      "experience_id": "data-exp-1",
+      "rank": 1
+    },
+    {
+      "experience_id": "data-exp-2",
+      "rank": 2
+    }
+  ],
+  "gaps": [],
+  "greeting": "您好，示例大学统计学硕士在读；每周可到岗 4 天、可连续实习 3 个月以上。\n岗位要的 SQL 与指标、AB 测试、异常归因，这三块我都在保险科技实习里做过。\n简历发您，方便的话看一眼，感谢！",
+  "preferences": {},
+  "status": "draft",
+  "versions": [
+    {
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00+08:00",
+      "changes": "demo",
+      "resume_json": {
+        "header": {
+          "job_title": "数据分析实习生",
+          "availability": "每周到岗 4 天，可连续实习 3 个月以上"
+        },
+        "education": {
+          "schools": [
+            {
+              "start": "2024-09",
+              "end": "2027-06",
+              "school": "示例大学",
+              "college": "统计学",
+              "degree": "硕士",
+              "note": ""
+            }
+          ],
+          "fields": [
+            {
+              "label": "专业成绩",
+              "text": "GPA 3.9/4.0，前 5%"
+            },
+            {
+              "label": "主修课程",
+              "text": "回归分析（A）、机器学习（A）、数据库原理（A）"
+            },
+            {
+              "label": "荣誉奖项",
+              "text": "校级一等奖学金（前 5%）；校级数据竞赛（一等奖）"
+            }
+          ]
+        },
+        "sections": [
+          {
+            "title": "实习经历",
+            "experiences": [
+              {
+                "experience_id": "data-exp-1",
+                "bullets": [
+                  {
+                    "label": "SQL 取数与指标看板",
+                    "desc": "用 SQL 清洗 10 万+ 条保单数据，搭建 6 项风控指标看板；异常识别提前 2 天，支撑策略调整。",
+                    "bold": [
+                      "10 万+ 条",
+                      "6 项",
+                      "提前 2 天"
+                    ]
+                  },
+                  {
+                    "label": "AB 测试与策略复盘",
+                    "desc": "设计 1 组 AB 测试并完成显著性检验，输出 2 份策略复盘；策略调整覆盖 3 个客群。",
+                    "bold": [
+                      "AB 测试",
+                      "2 份",
+                      "3 个客群"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "竞赛经历",
+            "experiences": [
+              {
+                "experience_id": "data-exp-2",
+                "bullets": [
+                  {
+                    "label": "用户流失预测",
+                    "desc": "带队清洗 5 万条行为数据，对比逻辑回归与树模型完成用户流失预测；获得校赛一等奖。",
+                    "bold": [
+                      "5 万条",
+                      "逻辑回归",
+                      "一等奖"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "abilities": [
+          {
+            "label": "SQL 与数据处理",
+            "text": "熟练使用 SQL 与 Python（pandas）取数、清洗与分析，能独立搭建指标看板。",
+            "bold": [
+              "SQL",
+              "Python",
+              "指标看板"
+            ]
+          },
+          {
+            "label": "统计建模",
+            "text": "掌握回归、AB 测试与模型对比，能用显著性检验判断策略效果。",
+            "bold": [
+              "回归",
+              "AB 测试"
+            ]
+          },
+          {
+            "label": "业务分析",
+            "text": "能从指标异常出发做归因，输出可落地的策略建议。",
+            "bold": [
+              "指标异常",
+              "策略建议"
+            ]
+          }
+        ]
+      },
+      "analysis_md": "# 数据分析实习生 · demo\n"
+    }
+  ],
+  "created_at": "2026-01-01T00:00:00+08:00",
+  "updated_at": "2026-01-01T00:00:00+08:00"
+}

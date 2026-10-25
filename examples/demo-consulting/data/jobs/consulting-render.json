@@ -1,0 +1,187 @@
+{
+  "id": "consulting-render",
+  "job_title": "战略咨询 PTA",
+  "company": "示例咨询",
+  "availability": "每周到岗 3 天，可连续实习 12 周以上",
+  "jd_text": "战略咨询 PTA（示例咨询，虚构）\n\n工作内容\n1. 参与咨询项目，协助桌面研究、竞品扫描与数据整理；\n2. 整理专家访谈纪要，提炼关键信息；\n3. 协助搭建 Excel 测算模型、制作汇报材料。\n\n任职要求\n1. 本科或硕士在读，专业不限；\n2. 较强的逻辑分析与问题解决能力；\n3. 中英文口头与书面表达流利；\n4. 每周至少 3 个工作日，连续 12 周以上。\n",
+  "requirements": [
+    {
+      "requirement": "逻辑分析与问题解决",
+      "category": "必备"
+    },
+    {
+      "requirement": "桌面研究与访谈",
+      "category": "必备"
+    },
+    {
+      "requirement": "中英文汇报",
+      "category": "必备"
+    }
+  ],
+  "matches": [
+    {
+      "requirement": "逻辑分析与问题解决",
+      "ability_id": "con-ab-1",
+      "ability_label": "结构化问题拆解",
+      "star_statement_ids": [
+        "con-star-1"
+      ],
+      "match_level": "强",
+      "reason": "用议题树拆解增长问题并搭建测算"
+    },
+    {
+      "requirement": "桌面研究与访谈",
+      "ability_id": "con-ab-2",
+      "ability_label": "访谈与桌面研究",
+      "star_statement_ids": [
+        "con-star-2"
+      ],
+      "match_level": "强",
+      "reason": "30 份桌面研究、12 场访谈纪要"
+    },
+    {
+      "requirement": "中英文汇报",
+      "ability_id": "con-ab-3",
+      "ability_label": "汇报呈现",
+      "star_statement_ids": [
+        "con-star-3"
+      ],
+      "match_level": "强",
+      "reason": "15 页英文案例汇报获校赛冠军"
+    }
+  ],
+  "selected_experience_ids": [
+    "con-exp-1",
+    "con-exp-2"
+  ],
+  "experience_rank": [
+    {
+      "experience_id": "con-exp-1",
+      "rank": 1
+    },
+    {
+      "experience_id": "con-exp-2",
+      "rank": 2
+    }
+  ],
+  "gaps": [],
+  "greeting": "您好，示例大学管理学本科在读；每周可到岗 3 天、可连续实习 12 周以上。\n岗位要的结构化拆解、桌面研究与访谈、中英文汇报，这三块我都在 PTA 和案例竞赛里做过。\n简历发您，方便的话看一眼，感谢！",
+  "preferences": {},
+  "status": "draft",
+  "versions": [
+    {
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00+08:00",
+      "changes": "demo",
+      "resume_json": {
+        "header": {
+          "job_title": "战略咨询 PTA",
+          "availability": "每周到岗 3 天，可连续实习 12 周以上"
+        },
+        "education": {
+          "schools": [
+            {
+              "start": "2023-09",
+              "end": "2027-06",
+              "school": "示例大学",
+              "college": "管理学",
+              "degree": "本科",
+              "note": ""
+            }
+          ],
+          "fields": [
+            {
+              "label": "专业成绩",
+              "text": "GPA 3.8/4.0，前 10%"
+            },
+            {
+              "label": "主修课程",
+              "text": "战略管理（A）、运营管理（A）、统计学（A-）"
+            },
+            {
+              "label": "荣誉奖项",
+              "text": "校级优秀学生干部；校级案例竞赛（冠军）"
+            }
+          ]
+        },
+        "sections": [
+          {
+            "title": "实习经历",
+            "experiences": [
+              {
+                "experience_id": "con-exp-1",
+                "bullets": [
+                  {
+                    "label": "结构化问题拆解",
+                    "desc": "用议题树拆解客户增长问题，完成 30 份桌面研究与竞品扫描；搭建 Excel 市场测算模型，支撑项目组确定分析框架。",
+                    "bold": [
+                      "议题树",
+                      "30 份",
+                      "市场测算"
+                    ]
+                  },
+                  {
+                    "label": "访谈与汇报",
+                    "desc": "整理 12 场专家访谈纪要，归纳渠道与价格带信号；输出 20 页汇报材料，支撑 2 个项目的客户汇报。",
+                    "bold": [
+                      "12 场",
+                      "20 页"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "竞赛经历",
+            "experiences": [
+              {
+                "experience_id": "con-exp-2",
+                "bullets": [
+                  {
+                    "label": "案例分析与汇报",
+                    "desc": "带队拆解消费品增长案例，搭建 3 年收入测算并完成 15 页英文汇报；获得校赛冠军。",
+                    "bold": [
+                      "3 年",
+                      "15 页",
+                      "冠军"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "abilities": [
+          {
+            "label": "结构化问题拆解",
+            "text": "习惯用议题树拆解问题，能把模糊目标拆成可验证假设，并用 Excel 搭建市场测算。",
+            "bold": [
+              "议题树",
+              "市场测算"
+            ]
+          },
+          {
+            "label": "访谈与桌面研究",
+            "text": "完成 30 份桌面研究与 12 场专家访谈纪要，能快速提炼渠道、价格带与竞争信号。",
+            "bold": [
+              "30 份",
+              "12 场"
+            ]
+          },
+          {
+            "label": "中英文汇报",
+            "text": "能独立制作 15 页以上的中英文汇报材料，CET-6 610 分。",
+            "bold": [
+              "中英文汇报",
+              "CET-6 610"
+            ]
+          }
+        ]
+      },
+      "analysis_md": "# 战略咨询 PTA · demo\n"
+    }
+  ],
+  "created_at": "2026-01-01T00:00:00+08:00",
+  "updated_at": "2026-01-01T00:00:00+08:00"
+}

@@ -1,0 +1,203 @@
+{
+  "version": "0.1.0",
+  "profile": {
+    "name": "许清和",
+    "phone": "138-0000-0000",
+    "email": "demo@example.com"
+  },
+  "experiences": [
+    {
+      "id": "law-exp-1",
+      "title": "示例律所 · 实习生",
+      "category": "internship",
+      "role": "实习生",
+      "start_date": "2025-07",
+      "end_date": "2025-12",
+      "facts": [
+        "审阅与修订 40 份中英文合同",
+        "完成 30 次法律法规与案例检索",
+        "撰写 5 份法律备忘录",
+        "完成 8 份文件翻译"
+      ],
+      "actions": [
+        "合同审阅",
+        "法律检索",
+        "备忘录撰写",
+        "法律翻译"
+      ],
+      "results": [
+        "5 份备忘录被主办律师采用"
+      ],
+      "ability_hypotheses": [
+        "合同审阅",
+        "法律检索"
+      ],
+      "verification_status": "verified",
+      "source_refs": [
+        "demo"
+      ],
+      "open_questions": []
+    },
+    {
+      "id": "law-exp-2",
+      "title": "示例零售集团 · 法务实习生",
+      "category": "internship",
+      "role": "法务实习生",
+      "start_date": "2026-01",
+      "end_date": "2026-05",
+      "facts": [
+        "审核 20 份产品宣传与促销规则",
+        "处理 15 件产品质量与宣传客诉",
+        "起草股东会/董事会决议 6 份"
+      ],
+      "actions": [
+        "广告合规审核",
+        "客诉处理",
+        "决议起草"
+      ],
+      "results": [
+        "形成 1 份广告合规检查清单"
+      ],
+      "ability_hypotheses": [
+        "合规与沟通",
+        "合同审阅"
+      ],
+      "verification_status": "verified",
+      "source_refs": [
+        "demo"
+      ],
+      "open_questions": []
+    }
+  ],
+  "star_statements": [
+    {
+      "id": "law-star-1",
+      "experience_id": "law-exp-1",
+      "ability": "合同审阅",
+      "situation": "合同量较大",
+      "task": "控制合同风险",
+      "action": "审阅与修订 40 份中英文合同，标注风险条款",
+      "result": "5 份备忘录被主办律师采用",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "law-star-2",
+      "experience_id": "law-exp-1",
+      "ability": "法律检索",
+      "situation": "争议解决",
+      "task": "支持法律意见",
+      "action": "完成 30 次法规与案例检索，撰写 5 份备忘录",
+      "result": "检索结论进入法律意见",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "law-star-3",
+      "experience_id": "law-exp-2",
+      "ability": "合规与沟通",
+      "situation": "广告合规",
+      "task": "降低宣传风险",
+      "action": "审核 20 份宣传与促销规则，处理 15 件客诉",
+      "result": "形成 1 份合规检查清单",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    }
+  ],
+  "abilities": [
+    {
+      "id": "law-ab-1",
+      "label": "合同审阅",
+      "description": "中英文合同审阅与风险条款识别",
+      "star_statement_refs": [
+        "law-star-1"
+      ]
+    },
+    {
+      "id": "law-ab-2",
+      "label": "法律检索",
+      "description": "法规与案例检索、备忘录撰写",
+      "star_statement_refs": [
+        "law-star-2"
+      ]
+    },
+    {
+      "id": "law-ab-3",
+      "label": "合规与沟通",
+      "description": "广告合规、客诉处理与跨部门沟通",
+      "star_statement_refs": [
+        "law-star-3"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "示例大学",
+      "major": "法学",
+      "degree": "硕士",
+      "start_date": "2024-09",
+      "end_date": "2027-06",
+      "gpa": 3.8,
+      "gpa_scale": 4.0,
+      "rank": "前 10%",
+      "courses": [
+        {
+          "name": "合同法",
+          "grade": "A"
+        },
+        {
+          "name": "公司法",
+          "grade": "A"
+        },
+        {
+          "name": "法律检索",
+          "grade": "A"
+        }
+      ],
+      "english": [
+        {
+          "name": "CET-6",
+          "score": 610
+        }
+      ],
+      "note": "法律职业资格 A 证"
+    }
+  ],
+  "honors": [
+    {
+      "title": "校级二等奖学金",
+      "year": "2025",
+      "level": "校级",
+      "detail": "前 10%"
+    },
+    {
+      "title": "模拟法庭比赛",
+      "year": "2024",
+      "level": "校级",
+      "detail": "优秀辩手"
+    }
+  ],
+  "skills": [
+    {
+      "category": "法律工具",
+      "items": [
+        "北大法宝",
+        "Westlaw",
+        "Excel"
+      ]
+    },
+    {
+      "category": "语言",
+      "items": [
+        "英文合同审阅",
+        "法律翻译"
+      ]
+    }
+  ]
+}

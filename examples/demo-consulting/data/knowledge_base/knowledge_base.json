@@ -1,0 +1,204 @@
+{
+  "version": "0.1.0",
+  "profile": {
+    "name": "林知远",
+    "phone": "138-0000-0000",
+    "email": "demo@example.com"
+  },
+  "experiences": [
+    {
+      "id": "con-exp-1",
+      "title": "示例咨询 · 兼职项目助理（PTA）",
+      "category": "internship",
+      "role": "PTA",
+      "start_date": "2025-09",
+      "end_date": "2026-02",
+      "facts": [
+        "完成 30 份桌面研究与竞品扫描",
+        "整理 12 场专家访谈纪要",
+        "搭建 Excel 市场测算模型",
+        "输出 20 页汇报材料"
+      ],
+      "actions": [
+        "桌面研究与竞品扫描",
+        "整理访谈纪要",
+        "搭建测算模型",
+        "制作汇报材料"
+      ],
+      "results": [
+        "支撑 2 个项目的客户汇报"
+      ],
+      "ability_hypotheses": [
+        "结构化问题拆解",
+        "访谈与桌面研究",
+        "汇报呈现"
+      ],
+      "verification_status": "verified",
+      "source_refs": [
+        "demo"
+      ],
+      "open_questions": []
+    },
+    {
+      "id": "con-exp-2",
+      "title": "校级案例竞赛 · 队长",
+      "category": "competition",
+      "role": "队长",
+      "start_date": "2025-03",
+      "end_date": "2025-06",
+      "facts": [
+        "带队拆解 1 个消费品增长案例",
+        "搭建 3 年收入测算",
+        "完成 15 页英文汇报"
+      ],
+      "actions": [
+        "拆解问题",
+        "搭建测算",
+        "英文汇报"
+      ],
+      "results": [
+        "校赛冠军"
+      ],
+      "ability_hypotheses": [
+        "结构化问题拆解",
+        "汇报呈现"
+      ],
+      "verification_status": "verified",
+      "source_refs": [
+        "demo"
+      ],
+      "open_questions": []
+    }
+  ],
+  "star_statements": [
+    {
+      "id": "con-star-1",
+      "experience_id": "con-exp-1",
+      "ability": "结构化问题拆解",
+      "situation": "项目启动",
+      "task": "拆解客户增长问题",
+      "action": "用议题树拆解 3 层问题，完成 30 份桌面研究",
+      "result": "支撑项目组确定分析框架",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "con-star-2",
+      "experience_id": "con-exp-1",
+      "ability": "访谈与桌面研究",
+      "situation": "专家访谈",
+      "task": "提炼关键信息",
+      "action": "整理 12 场访谈纪要，归纳渠道与价格带信号",
+      "result": "形成 1 份访谈洞察",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "con-star-3",
+      "experience_id": "con-exp-2",
+      "ability": "汇报呈现",
+      "situation": "案例竞赛",
+      "task": "完成英文汇报",
+      "action": "搭建 3 年收入测算并制作 15 页英文材料",
+      "result": "获得校赛冠军",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    }
+  ],
+  "abilities": [
+    {
+      "id": "con-ab-1",
+      "label": "结构化问题拆解",
+      "description": "议题树、假设驱动、市场测算",
+      "star_statement_refs": [
+        "con-star-1"
+      ]
+    },
+    {
+      "id": "con-ab-2",
+      "label": "访谈与桌面研究",
+      "description": "专家访谈、竞品与行业研究",
+      "star_statement_refs": [
+        "con-star-2"
+      ]
+    },
+    {
+      "id": "con-ab-3",
+      "label": "汇报呈现",
+      "description": "PPT 与英文汇报",
+      "star_statement_refs": [
+        "con-star-3"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "示例大学",
+      "major": "管理学",
+      "degree": "本科",
+      "start_date": "2023-09",
+      "end_date": "2027-06",
+      "gpa": 3.8,
+      "gpa_scale": 4.0,
+      "rank": "前 10%",
+      "courses": [
+        {
+          "name": "战略管理",
+          "grade": "A"
+        },
+        {
+          "name": "运营管理",
+          "grade": "A"
+        },
+        {
+          "name": "统计学",
+          "grade": "A-"
+        }
+      ],
+      "english": [
+        {
+          "name": "CET-6",
+          "score": 610
+        }
+      ],
+      "note": ""
+    }
+  ],
+  "honors": [
+    {
+      "title": "校级优秀学生干部",
+      "year": "2025",
+      "level": "校级",
+      "detail": ""
+    },
+    {
+      "title": "校级案例竞赛",
+      "year": "2025",
+      "level": "校级",
+      "detail": "冠军"
+    }
+  ],
+  "skills": [
+    {
+      "category": "办公工具",
+      "items": [
+        "Excel（建模）",
+        "PowerPoint"
+      ]
+    },
+    {
+      "category": "研究方法",
+      "items": [
+        "桌面研究",
+        "专家访谈",
+        "市场测算"
+      ]
+    }
+  ]
+}

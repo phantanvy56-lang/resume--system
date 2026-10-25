@@ -1,0 +1,207 @@
+{
+  "version": "0.1.0",
+  "profile": {
+    "name": "周予安",
+    "phone": "138-0000-0000",
+    "email": "demo@example.com"
+  },
+  "experiences": [
+    {
+      "id": "data-exp-1",
+      "title": "示例保险科技 · 数据分析实习生",
+      "category": "internship",
+      "role": "数据分析实习生",
+      "start_date": "2025-07",
+      "end_date": "2025-12",
+      "facts": [
+        "用 SQL 取数并清洗 10 万+ 条保单数据",
+        "搭建 6 项风控指标看板",
+        "设计并分析 1 组 AB 测试",
+        "输出 2 份策略复盘"
+      ],
+      "actions": [
+        "SQL 取数与清洗",
+        "搭建指标看板",
+        "AB 测试",
+        "策略复盘"
+      ],
+      "results": [
+        "异常识别提前 2 天",
+        "策略调整覆盖 3 个客群"
+      ],
+      "ability_hypotheses": [
+        "SQL 与指标",
+        "统计建模",
+        "业务分析"
+      ],
+      "verification_status": "verified",
+      "source_refs": [
+        "demo"
+      ],
+      "open_questions": []
+    },
+    {
+      "id": "data-exp-2",
+      "title": "校级数据竞赛 · 队长",
+      "category": "competition",
+      "role": "队长",
+      "start_date": "2025-03",
+      "end_date": "2025-06",
+      "facts": [
+        "带队完成 1 个用户流失预测项目",
+        "清洗 5 万条行为数据",
+        "用逻辑回归与树模型对比"
+      ],
+      "actions": [
+        "数据清洗",
+        "特征工程",
+        "模型对比"
+      ],
+      "results": [
+        "校赛一等奖"
+      ],
+      "ability_hypotheses": [
+        "统计建模",
+        "业务分析"
+      ],
+      "verification_status": "verified",
+      "source_refs": [
+        "demo"
+      ],
+      "open_questions": []
+    }
+  ],
+  "star_statements": [
+    {
+      "id": "data-star-1",
+      "experience_id": "data-exp-1",
+      "ability": "SQL 与指标",
+      "situation": "风控数据接入",
+      "task": "建立监控指标",
+      "action": "用 SQL 清洗 10 万+ 条保单数据，搭建 6 项指标看板",
+      "result": "异常识别提前 2 天",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "data-star-2",
+      "experience_id": "data-exp-1",
+      "ability": "统计建模",
+      "situation": "策略验证",
+      "task": "评估策略效果",
+      "action": "设计 AB 测试并做显著性检验",
+      "result": "策略调整覆盖 3 个客群",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "data-star-3",
+      "experience_id": "data-exp-2",
+      "ability": "统计建模",
+      "situation": "用户流失预测",
+      "task": "提升预测效果",
+      "action": "对比逻辑回归与树模型，完成特征工程",
+      "result": "校赛一等奖",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    }
+  ],
+  "abilities": [
+    {
+      "id": "data-ab-1",
+      "label": "SQL 与指标",
+      "description": "取数、清洗、指标体系与看板",
+      "star_statement_refs": [
+        "data-star-1"
+      ]
+    },
+    {
+      "id": "data-ab-2",
+      "label": "统计建模",
+      "description": "回归、AB 测试、模型对比",
+      "star_statement_refs": [
+        "data-star-2",
+        "data-star-3"
+      ]
+    },
+    {
+      "id": "data-ab-3",
+      "label": "业务分析",
+      "description": "异常归因与策略建议",
+      "star_statement_refs": [
+        "data-star-2"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "示例大学",
+      "major": "统计学",
+      "degree": "硕士",
+      "start_date": "2024-09",
+      "end_date": "2027-06",
+      "gpa": 3.9,
+      "gpa_scale": 4.0,
+      "rank": "前 5%",
+      "courses": [
+        {
+          "name": "回归分析",
+          "grade": "A"
+        },
+        {
+          "name": "机器学习",
+          "grade": "A"
+        },
+        {
+          "name": "数据库原理",
+          "grade": "A"
+        }
+      ],
+      "english": [
+        {
+          "name": "CET-6",
+          "score": 610
+        }
+      ],
+      "note": ""
+    }
+  ],
+  "honors": [
+    {
+      "title": "校级一等奖学金",
+      "year": "2025",
+      "level": "校级",
+      "detail": "前 5%"
+    },
+    {
+      "title": "校级数据竞赛",
+      "year": "2025",
+      "level": "校级",
+      "detail": "一等奖"
+    }
+  ],
+  "skills": [
+    {
+      "category": "数据处理",
+      "items": [
+        "SQL",
+        "Python（pandas）",
+        "Excel"
+      ]
+    },
+    {
+      "category": "分析建模",
+      "items": [
+        "回归分析",
+        "AB 测试",
+        "指标体系"
+      ]
+    }
+  ]
+}

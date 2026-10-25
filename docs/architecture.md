@@ -35,7 +35,7 @@ B（agent_b）
 | `src/resume_system/checks.py` | 发布前检查（荣誉、教育、板块、P0 覆盖） |
 | `src/resume_system/export/` | 结构化正文 -> Word / PDF / PNG |
 | `docs/` | 排版、语言、打招呼、架构等说明 |
-| `examples/demo/` | 虚构人物的可运行示例 |
+| `examples/` | 5 个虚构行业 demo + 生成脚本 |
 | `data/`、`output/` | 本地数据与产物，**不进公开仓库** |
 
 ## 数据边界

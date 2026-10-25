@@ -1,0 +1,17 @@
+abilities:
+- label: SQL 与数据处理
+  text: 熟练使用 SQL 与 Python（pandas）取数、清洗与分析，能独立搭建指标看板。
+  bold:
+  - SQL
+  - Python
+  - 指标看板
+- label: 统计建模
+  text: 掌握回归、AB 测试与模型对比，能用显著性检验判断策略效果。
+  bold:
+  - 回归
+  - AB 测试
+- label: 业务分析
+  text: 能从指标异常出发做归因，输出可落地的策略建议。
+  bold:
+  - 指标异常
+  - 策略建议

@@ -24,7 +24,7 @@ resume-system/
 │   ├── export/                 # DOCX 渲染器（B 正文 -> 排好版的 Word 简历）
 │   └── prompts/                # 提示词（与代码分离）
 ├── output/                     # 简历成稿输出（.docx / .pdf / .png；不进公开仓库）
-├── examples/demo/              # 虚构人物的可运行示例
+├── examples/                   # 5 个虚构行业 demo（电商/金融/咨询/数据/法务）
 └── tools/                      # 给你用的维护脚本
 ```
 
@@ -164,7 +164,13 @@ RESUME_DATA_DIR=examples/demo/data RESUME_OUTPUT_DIR=/tmp/demo_out \
 python -m resume_system.export.docx_export --task demo-render --pdf --png
 ```
 
-`examples/demo/README.md` 有完整说明；demo 里所有人物、学校、公司、数字均为虚构。
+`examples/README.md` 有 5 个行业 demo 的列表和来源；所有人物、学校、公司、数字均为虚构。
+
+```bash
+# 其他行业
+RESUME_DATA_DIR=examples/demo-finance/data RESUME_OUTPUT_DIR=/tmp/demo_finance \
+python -m resume_system.export.docx_export --task finance-render --pdf
+```
 
 ## License
 
