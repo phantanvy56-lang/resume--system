@@ -1,0 +1,385 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KnowledgeBase",
+  "description": "个人经历与能力知识库（A 维护、B 读取）。一个 schema 三处复用：校验数据文件、约束模型结构化输出、给维护 Agent 当规范。",
+  "type": "object",
+  "required": [
+    "version",
+    "experiences",
+    "star_statements",
+    "abilities",
+    "education",
+    "honors",
+    "skills",
+    "profile"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "experiences": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/experience"
+      }
+    },
+    "star_statements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/star_statement"
+      }
+    },
+    "abilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ability"
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/education"
+      }
+    },
+    "honors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/honor"
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/skill"
+      }
+    },
+    "profile": {
+      "$ref": "#/definitions/profile"
+    }
+  },
+  "definitions": {
+    "experience": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "category",
+        "facts",
+        "verification_status",
+        "source_refs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "description": "经历类型 id，取值见 config/categories.yaml（默认 internship/competition/research/campus）"
+        },
+        "role": {
+          "type": "string",
+          "description": "角色 / 职务（如 研究助理、队长、项目负责人）；渲染项目行时优先用它，不要从标题猜"
+        },
+        "start_date": {
+          "type": "string",
+          "description": "起始时间，精确到月，如 2025-09（可空）"
+        },
+        "end_date": {
+          "type": "string",
+          "description": "结束时间，精确到月，如 2026-05；在读/在岗可空"
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ability_hypotheses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "verification_status": {
+          "type": "string",
+          "enum": [
+            "verified",
+            "pending",
+            "inferred"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "open_questions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "star_statement": {
+      "type": "object",
+      "required": [
+        "id",
+        "ability",
+        "action",
+        "result",
+        "source_refs",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "ability": {
+          "type": "string",
+          "description": "这条描述体现的能力标签"
+        },
+        "situation": {
+          "type": "string",
+          "description": "情境（S）"
+        },
+        "task": {
+          "type": "string",
+          "description": "任务（T）"
+        },
+        "action": {
+          "type": "string",
+          "description": "行动（A）"
+        },
+        "result": {
+          "type": "string",
+          "description": "结果（R），尽量量化"
+        },
+        "statement": {
+          "type": "string",
+          "description": "可直接上简历的成品句"
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "verified",
+            "pending",
+            "inferred"
+          ]
+        },
+        "experience_id": {
+          "type": "string",
+          "description": "关联的经历 ID（可选）"
+        }
+      }
+    },
+    "ability": {
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "star_statement_refs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "description": "规范能力标签（去重后的能力本体）"
+        },
+        "star_statement_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "指向 star_statements 的 id 列表"
+        },
+        "description": {
+          "type": "string",
+          "description": "该能力的一两句说明（可选）"
+        }
+      }
+    },
+    "education": {
+      "type": "object",
+      "required": [
+        "school",
+        "major",
+        "degree"
+      ],
+      "properties": {
+        "school": {
+          "type": "string"
+        },
+        "major": {
+          "type": "string"
+        },
+        "degree": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string",
+          "description": "专业亮点/补充说明"
+        },
+        "start_date": {
+          "type": "string"
+        },
+        "end_date": {
+          "type": "string"
+        },
+        "gpa": {
+          "type": "number"
+        },
+        "gpa_scale": {
+          "type": "number"
+        },
+        "rank": {
+          "type": "string",
+          "description": "专业排名，如 1/34"
+        },
+        "courses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/course"
+          }
+        },
+        "english": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/english_test"
+          }
+        }
+      }
+    },
+    "course": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "grade": {
+          "type": "string",
+          "description": "等级制成绩（A+/A/B+…），低于 A 的课程不展示"
+        },
+        "score": {
+          "type": "number",
+          "description": "百分制分数（可选）"
+        },
+        "score_scale": {
+          "type": "number",
+          "description": "百分制满分，默认 100"
+        }
+      }
+    },
+    "english_test": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "如 CET-6 / CET-4 / 雅思"
+        },
+        "score": {
+          "type": "number"
+        }
+      }
+    },
+    "honor": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "year": {
+          "type": "string",
+          "description": "获得学年/年份"
+        },
+        "level": {
+          "type": "string",
+          "description": "国家级/省级/校级等"
+        },
+        "detail": {
+          "type": "string",
+          "description": "排位、Top% 等补充"
+        }
+      }
+    },
+    "skill": {
+      "type": "object",
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "技能大类，如 数据分析软件 / 数据平台 / 编程语言"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "姓名"
+        },
+        "phone": {
+          "type": "string",
+          "description": "电话"
+        },
+        "email": {
+          "type": "string",
+          "description": "邮箱"
+        },
+        "political": {
+          "type": "string",
+          "description": "政治面貌"
+        },
+        "photo": {
+          "type": "string",
+          "description": "证件照文件路径（相对项目根）"
+        }
+      }
+    }
+  }
+}

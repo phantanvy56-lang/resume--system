@@ -1,0 +1,342 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JobTask",
+  "description": "单次求职任务工作区：B 创建维护，每次投递单独一份。保存 JD、岗位分析、入选经历与匹配理由、简历版本与修改记录，以及待 A 补充的缺口。岗位专属表达不覆盖长期知识库。",
+  "type": "object",
+  "required": [
+    "id",
+    "job_title",
+    "jd_text",
+    "requirements",
+    "matches",
+    "selected_experience_ids",
+    "gaps",
+    "versions",
+    "preferences",
+    "status",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "任务唯一 ID（uuid）"
+    },
+    "job_title": {
+      "type": "string",
+      "description": "目标岗位名称"
+    },
+    "company": {
+      "type": "string",
+      "description": "目标公司（可空）"
+    },
+    "availability": {
+      "type": "string",
+      "description": "到岗时间/每周天数/实习时长（岗位专属，如「随时到岗，每周5天，可实习6个月」）"
+    },
+    "jd_text": {
+      "type": "string",
+      "description": "原始 JD 全文"
+    },
+    "requirements": {
+      "type": "array",
+      "description": "从 JD 解析出的岗位要求",
+      "items": {
+        "$ref": "#/definitions/requirement"
+      }
+    },
+    "matches": {
+      "type": "array",
+      "description": "JD 要求 -> 知识库能力的证据匹配（含匹配理由）",
+      "items": {
+        "$ref": "#/definitions/match"
+      }
+    },
+    "selected_experience_ids": {
+      "type": "array",
+      "description": "本岗位选中的经历 id 列表（指向 knowledge_base.experiences）",
+      "items": {
+        "type": "string"
+      }
+    },
+    "experience_rank": {
+      "type": "array",
+      "description": "经历级相关度排序：rank=1 表示与 JD 最相关。排版超页时按 rank 从大到小（最不相关）开始删。",
+      "items": {
+        "type": "object",
+        "required": [
+          "experience_id",
+          "rank"
+        ],
+        "properties": {
+          "experience_id": {
+            "type": "string"
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "description": "JD 要求但知识库无证据的缺口，转交 A 补充",
+      "items": {
+        "$ref": "#/definitions/gap"
+      }
+    },
+    "versions": {
+      "type": "array",
+      "description": "简历产出与修改记录（每次修改追加一版）",
+      "items": {
+        "$ref": "#/definitions/version"
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "description": "本岗位的表达偏好（反馈分类沉淀，可空）",
+      "additionalProperties": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "final"
+      ],
+      "description": "任务状态：draft=草稿，final=已定稿"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "创建时间（ISO 8601）"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "最后更新时间（ISO 8601）"
+    },
+    "greeting": {
+      "type": "string",
+      "description": "BOSS/邮件首条打招呼"
+    },
+    "warnings": {
+      "type": "array",
+      "description": "发布前检查结果（overlap/honors/education/p0_uncovered）",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "severity",
+          "message"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "error",
+              "warn"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "jd_analysis": {
+      "type": "object",
+      "description": "JD 解析结果（schemas/jd_analysis.schema.json）"
+    },
+    "exclude_honors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "本岗位不展示的荣誉（按知识库标题）"
+    },
+    "threshold_checks": {
+      "type": "array",
+      "description": "门槛类要求的核对结果（学历/语言/院校层次）",
+      "items": {
+        "type": "object",
+        "required": [
+          "requirement_id",
+          "text",
+          "status",
+          "reason"
+        ],
+        "properties": {
+          "requirement_id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "满足",
+              "不满足",
+              "未知"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "requirement": {
+      "type": "object",
+      "required": [
+        "requirement"
+      ],
+      "properties": {
+        "requirement": {
+          "type": "string",
+          "description": "JD 中的一条具体要求"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "必备",
+            "优先",
+            "其他"
+          ],
+          "description": "该要求的性质分类"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "能力",
+            "门槛",
+            "特质"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "P0",
+            "P1",
+            "P2"
+          ]
+        }
+      }
+    },
+    "match": {
+      "type": "object",
+      "required": [
+        "requirement",
+        "match_level",
+        "reason"
+      ],
+      "properties": {
+        "requirement": {
+          "type": "string",
+          "description": "对应的 JD 要求"
+        },
+        "ability_id": {
+          "type": "string",
+          "description": "知识库规范能力 id（knowledge_base.abilities）"
+        },
+        "ability_label": {
+          "type": "string",
+          "description": "命中的规范能力标签（冗余存，方便回看）"
+        },
+        "star_statement_ids": {
+          "type": "array",
+          "description": "支撑证据的 id 列表（指向 knowledge_base.star_statements）",
+          "items": {
+            "type": "string"
+          }
+        },
+        "match_level": {
+          "type": "string",
+          "enum": [
+            "强",
+            "中",
+            "弱"
+          ],
+          "description": "匹配强度"
+        },
+        "reason": {
+          "type": "string",
+          "description": "匹配理由（为什么这段经历能支撑该要求）"
+        },
+        "requirement_id": {
+          "type": "string",
+          "description": "对应 JD 解析里的要求 id（如 R1）"
+        }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "required": [
+        "requirement",
+        "status"
+      ],
+      "properties": {
+        "requirement": {
+          "type": "string",
+          "description": "对应 JD 要求"
+        },
+        "missing_ability": {
+          "type": "string",
+          "description": "缺失的能力标签"
+        },
+        "question": {
+          "type": "string",
+          "description": "转交 A 的具体追问问题"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "resolved"
+          ],
+          "description": "open=待 A 补充，resolved=已补证据"
+        }
+      }
+    },
+    "version": {
+      "type": "object",
+      "required": [
+        "version",
+        "created_at"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "description": "版本号，从 1 递增"
+        },
+        "resume_text": {
+          "type": "string",
+          "description": "历史 markdown（旧任务）"
+        },
+        "changes": {
+          "type": "string",
+          "description": "相对上一版的修改说明"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "本版生成时间（ISO 8601）"
+        },
+        "resume_json": {
+          "type": "object",
+          "description": "结构化简历正文（schema 见 schemas/resume.schema.json）"
+        },
+        "analysis_md": {
+          "type": "string",
+          "description": "由数据生成的分析 markdown（匹配表/正文/打招呼/缺口）"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+version: 1
+# 板块顺序：fixed = 按下面的 order 固定排序（当前选择）。
+# relevance = 中间板块按各自最高相关度排序（需要另做排序逻辑，暂未实现）。
+section_order: fixed
+
+# 经历板块定义：A 写入 category，B 按这里映射成简历板块标题。
+# 想加新类型（全职 / 志愿 / 教学…）直接在这里加，不用改代码。
+categories:
+  - id: internship
+    label: 实习经历
+    order: 2
+  - id: project
+    label: 项目经历
+    order: 2.5
+  - id: competition
+    label: 竞赛经历
+    order: 3
+  - id: research
+    label: 科研经历
+    order: 4
+  - id: campus
+    label: 校园经历
+    order: 5
+
+# 更多可选类型（需要时取消注释）：
+#  - id: fulltime
+#    label: 工作经历
+#    order: 1.5
+#  - id: volunteer
+#    label: 志愿经历
+#    order: 6

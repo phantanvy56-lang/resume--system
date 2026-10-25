@@ -1,0 +1,164 @@
+{
+  "id": "demo-render",
+  "job_title": "电商运营实习生",
+  "company": "示例电商",
+  "availability": "随时到岗，每周到岗 5 天",
+  "jd_text": "（demo）负责店铺日常运营、活动报名与数据分析。",
+  "requirements": [
+    {
+      "requirement": "店铺日常运营",
+      "category": "必备"
+    }
+  ],
+  "matches": [
+    {
+      "requirement": "店铺日常运营",
+      "ability_id": "demo-ab-1",
+      "ability_label": "电商平台运营",
+      "star_statement_ids": [
+        "demo-star-1"
+      ],
+      "match_level": "强",
+      "reason": "实习中负责商品与活动运营"
+    }
+  ],
+  "selected_experience_ids": [
+    "demo-ecom",
+    "demo-campus"
+  ],
+  "experience_rank": [
+    {
+      "experience_id": "demo-ecom",
+      "rank": 1
+    },
+    {
+      "experience_id": "demo-campus",
+      "rank": 2
+    }
+  ],
+  "gaps": [],
+  "greeting": "您好，示例大学市场营销 2027 届在读；随时到岗，每周 5 天、可连续实习 6 个月。",
+  "preferences": {},
+  "status": "draft",
+  "versions": [
+    {
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00+08:00",
+      "changes": "demo",
+      "resume_json": {
+        "header": {
+          "job_title": "电商运营实习生",
+          "availability": "随时到岗，每周到岗 5 天"
+        },
+        "education": {
+          "schools": [
+            {
+              "start": "2023-09",
+              "end": "2027-06",
+              "school": "示例大学",
+              "college": "市场营销",
+              "degree": "本科",
+              "note": ""
+            }
+          ],
+          "fields": [
+            {
+              "label": "专业成绩",
+              "text": "GPA 3.8/4.0，排名前 15%"
+            },
+            {
+              "label": "主修课程",
+              "text": "市场调研（A）、消费者行为学（A）、统计学（B+）"
+            },
+            {
+              "label": "荣誉奖项",
+              "text": "校级二等奖学金（前 15%）；优秀学生干部"
+            }
+          ]
+        },
+        "sections": [
+          {
+            "title": "实习经历",
+            "experiences": [
+              {
+                "experience_id": "demo-ecom",
+                "bullets": [
+                  {
+                    "label": "商品与活动运营",
+                    "desc": "维护 120 余个 SKU 的上下架与活动价，跟进 3 场平台大促并配置 20 余组优惠；活动期 GMV 由月均 80 万元提升至 120 万元，转化率由 2.1% 提升至 2.8%。",
+                    "bold": [
+                      "120 余个",
+                      "3 场",
+                      "GMV",
+                      "120 万元",
+                      "2.8%"
+                    ]
+                  },
+                  {
+                    "label": "运营数据周报",
+                    "desc": "用 Excel 汇总 UV、转化率、GMV 等 6 项指标，连续 12 周输出周报；识别 2 款滞销款并完成替换，库存周转提升约 15%。",
+                    "bold": [
+                      "6 项",
+                      "12 周",
+                      "2 款",
+                      "15%"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "校园经历",
+            "experiences": [
+              {
+                "experience_id": "demo-campus",
+                "bullets": [
+                  {
+                    "label": "活动统筹与执行",
+                    "desc": "对接 3 家企业、统筹 12 名志愿者完成校园招聘宣讲会，覆盖学生 600 余人；到场率较上一届提升 25%。",
+                    "bold": [
+                      "3 家",
+                      "12 名",
+                      "600 余人",
+                      "25%"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "abilities": [
+          {
+            "label": "数据整理与分析",
+            "text": "熟练使用 Excel（VLOOKUP、数据透视表）完成活动报名与问卷数据的清洗汇总；会用 SQL 基础查询；掌握 Python 与 SPSS，具备数据处理与结果解读能力。",
+            "bold": [
+              "数据处理",
+              "结果解读"
+            ]
+          },
+          {
+            "label": "工具与效率",
+            "text": "会用 AI 工具整理会议纪要、生成问卷初稿，把重复的文案与表格工作沉淀成模板，提升执行效率。",
+            "bold": [
+              "AI 工具",
+              "模板"
+            ]
+          },
+          {
+            "label": "语言能力",
+            "text": "CET-6 540 分，具备英文资料阅读与邮件沟通能力。",
+            "bold": [
+              "英文资料阅读",
+              "邮件沟通"
+            ]
+          }
+        ]
+      },
+      "analysis_md": "# demo\n"
+    }
+  ],
+  "created_at": "2026-01-01T00:00:00+08:00",
+  "updated_at": "2026-01-01T00:00:00+08:00"
+}

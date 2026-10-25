@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ResumeBody",
+  "description": "简历正文的结构化表示。渲染器只读这个结构，不再解析 markdown。",
+  "type": "object",
+  "required": ["header", "education", "sections", "abilities"],
+  "properties": {
+    "header": {
+      "type": "object",
+      "required": ["job_title"],
+      "properties": {
+        "job_title": { "type": "string" },
+        "availability": { "type": "string" }
+      }
+    },
+    "education": {
+      "type": "object",
+      "required": ["schools", "fields"],
+      "properties": {
+        "schools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["school"],
+            "properties": {
+              "start": { "type": "string" },
+              "end": { "type": "string" },
+              "school": { "type": "string" },
+              "college": { "type": "string" },
+              "degree": { "type": "string" },
+              "note": { "type": "string" }
+            }
+          }
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["label", "text"],
+            "properties": {
+              "label": { "type": "string" },
+              "text": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "experiences"],
+        "properties": {
+          "title": { "type": "string" },
+          "experiences": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["experience_id", "bullets"],
+              "properties": {
+                "experience_id": { "type": "string" },
+                "bullets": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["label", "desc"],
+                    "properties": {
+                      "label": { "type": "string" },
+                      "desc": { "type": "string" },
+                      "bold": { "type": "array", "items": { "type": "string" } }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "abilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "text"],
+        "properties": {
+          "label": { "type": "string" },
+          "text": { "type": "string" },
+          "bold": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

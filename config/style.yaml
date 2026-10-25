@@ -1,0 +1,32 @@
+# 简历排版：改这里就能个性化，不用动代码。
+page:
+  width_cm: 21.0
+  height_cm: 29.7
+  margin_cm: 0.8
+
+fonts:
+  heading: 微软雅黑        # 栏目标题 / 正文
+  body: 微软雅黑
+  header: 宋体-简          # 顶部信息框（姓名/联系方式/到岗/意向）
+
+sizes:
+  name: 18
+  heading: 13.5
+  body: 12
+
+colors:
+  heading: "#2F5597"       # 栏目标题蓝
+  text: "#000000"
+
+spacing:
+  line_pt: 12.7            # 正文行距（精确值）
+  bullet_gap_pt: 3.2       # 字条之间
+  entry_gap_pt: 8          # 同板块两段经历之间
+  body_indent_pt: 15       # 正文/分点缩进
+
+tabs:
+  center_cm: 9.7           # 项目名称 / 学校居中位
+  right_cm: 19.4           # 角色 / 时间右对齐位
+
+photo:
+  height_cm: 3.0

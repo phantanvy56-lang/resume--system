@@ -1,0 +1,123 @@
+version: 1
+# 能力词表：JD 解析只能从这里选 ability_id；词表外写 NEW。
+# aliases 用来把知识库里已有的能力标签映射到固定 id。
+abilities:
+  - id: data_analysis
+    name: 数据分析
+    category: 分析
+    definition: 能把业务问题拆成指标，用数据得出结论并支撑决策
+    aliases: [数据分析与统计建模, 数据台账管理, 运营数据分析, 统计分析, 数据洞察]
+
+  - id: market_research
+    name: 市场与用户研究
+    category: 分析
+    definition: 能通过调研、竞品和人群分析形成市场判断
+    aliases: [市场调研与问卷设计, 竞品分析, 用户调研, 消费者洞察, 市场分析]
+
+  - id: research_method
+    name: 研究方法与实验设计
+    category: 分析
+    definition: 能设计抽样、问卷、实验或计量方案并保证结论可靠
+    aliases: [问卷设计, 抽样设计, 实验设计, 计量建模, 因果识别]
+
+  - id: reporting
+    name: 报告撰写与呈现
+    category: 分析
+    definition: 能把分析过程整理成结构清晰、有结论的报告或汇报
+    aliases: [报告撰写与需求分析, 分析报告, 汇报材料, 复盘报告]
+
+  - id: content_creation
+    name: 内容制作与传播
+    category: 业务
+    definition: 能产出文案、图文、视频等内容并完成发布与传播
+    aliases: [内容制作与传播, 内容运营, 新媒体运营, 文案策划]
+
+  - id: project_management
+    name: 项目推进与执行
+    category: 执行
+    definition: 能拆解任务、排期、跟进并在期限内交付结果
+    aliases: [组织协调与项目统筹, 项目管理, 活动执行, 进度管理]
+
+  - id: cross_functional
+    name: 跨部门沟通与协作
+    category: 沟通
+    definition: 能协调多方资源、对齐目标并推动流程落地
+    aliases: [跨部门沟通与流程对接, 跨团队协作, 流程推进, 沟通协调]
+
+  - id: client_relationship
+    name: 客户关系与沟通
+    category: 沟通
+    definition: 能维护客户关系、收集需求并推动问题闭环
+    aliases: [客户走访与需求收集, 客户维护, 客情维护, 客户成功]
+
+  - id: business_development
+    name: 商务拓展与谈判
+    category: 业务
+    definition: 能开拓合作方、推进商务谈判并达成合作
+    aliases: [外部拓展与商务洽谈, BD, 商务谈判, 合作拓展]
+
+  - id: operations_execution
+    name: 运营执行与履约
+    category: 执行
+    definition: 能跟进订单、交付或服务流程，处理异常并保证履约
+    aliases: [履约跟踪与异常处理, 订单履约, 交付跟进, 运营支持]
+
+  - id: ecommerce_ops
+    name: 电商平台运营
+    category: 业务
+    definition: 能在电商平台完成商品、活动、店铺的日常运营
+    aliases: [店铺运营, 平台运营, 电商运营, Listing 运营]
+
+  - id: growth_marketing
+    name: 推广与增长
+    category: 业务
+    definition: 能通过投放、活动或渠道手段获取流量并提升转化
+    aliases: [广告投放, 增长运营, 营销推广, 投放优化, ROI]
+
+  - id: product_selection
+    name: 产品与选品
+    category: 业务
+    definition: 能基于市场、竞品和用户需求做选品或产品规划
+    aliases: [选品, 商品管理, 产品规划, 类目运营]
+
+  - id: pricing_finance
+    name: 定价与财务分析
+    category: 分析
+    definition: 能做成本测算、定价、预算或财务分析
+    aliases: [定价, 成本测算, 财务分析, 预算管理, 毛利分析]
+
+  - id: supply_chain
+    name: 供应链与采购
+    category: 业务
+    definition: 能管理供应商、采购、库存或物流链路
+    aliases: [采购, 供应商管理, 物流管理, 库存管理, 供应链]
+
+  - id: compliance_review
+    name: 合规与材料审核
+    category: 执行
+    definition: 能按规则审核材料、识别风险并留痕
+    aliases: [材料审核与合规审查, 合规, 风控, 资质审核]
+
+  - id: hr_recruiting
+    name: 招聘与人才评估
+    category: 管理
+    definition: 能完成招聘执行、候选人评估与人才沟通
+    aliases: [招聘, 面试, 人才评估, 校园招聘]
+
+  - id: ai_workflow
+    name: AI 工具与工作流
+    category: 技术
+    definition: 能用大模型、自动化工具把重复工作沉淀成可复用流程
+    aliases: [AI 工作流搭建, AI 应用, 自动化流程, 提示词工程]
+
+  - id: english_communication
+    name: 英语沟通
+    category: 通用
+    definition: 能阅读英文资料并用英文完成书面或口头沟通
+    aliases: [英文单据处理与信息核对, 英文邮件, 英语, CET-6]
+
+  - id: team_leadership
+    name: 团队管理与领导
+    category: 管理
+    definition: 能带团队、分工、辅导并推动整体目标达成
+    aliases: [团队管理, 带队, 分工统筹, 领导力]

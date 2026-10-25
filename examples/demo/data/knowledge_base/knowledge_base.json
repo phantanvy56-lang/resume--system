@@ -1,0 +1,201 @@
+{
+  "version": "0.1.0",
+  "profile": {
+    "name": "张同学",
+    "phone": "138-0000-0000",
+    "email": "demo@example.com"
+  },
+  "experiences": [
+    {
+      "id": "demo-ecom",
+      "title": "青禾电商 · 店铺运营实习生",
+      "category": "internship",
+      "role": "店铺运营实习生",
+      "start_date": "2025-07",
+      "end_date": "2025-10",
+      "facts": [
+        "2025.07–2025.10 在广州青禾电商（虚构）天猫店实习，每周到岗 5 天",
+        "负责 120 余个 SKU 的上下架、标题与主图维护",
+        "跟进 3 场平台大促报名，配置满减与优惠券 20 余组",
+        "每周用 Excel 汇总 UV、转化率、GMV 等 6 项指标并输出周报"
+      ],
+      "actions": [
+        "维护商品信息并核对活动价与库存",
+        "跟进大促报名与优惠配置",
+        "汇总指标输出周报"
+      ],
+      "results": [
+        "活动期店铺 GMV 由月均 80 万元提升至 120 万元",
+        "转化率由 2.1% 提升至 2.8%",
+        "活动期零错价、零超卖"
+      ],
+      "ability_hypotheses": [
+        "电商平台运营",
+        "数据分析"
+      ],
+      "verification_status": "verified",
+      "source_refs": [
+        "demo"
+      ],
+      "open_questions": []
+    },
+    {
+      "id": "demo-campus",
+      "title": "校学生会 活动部 · 干事",
+      "category": "campus",
+      "role": "干事",
+      "start_date": "2024-09",
+      "end_date": "2025-06",
+      "facts": [
+        "统筹校园招聘宣讲会 1 场，对接 3 家企业，组织 12 名志愿者",
+        "覆盖学生 600 余人，回收问卷 180 份"
+      ],
+      "actions": [
+        "对接企业并排期",
+        "统筹志愿者分工",
+        "活动后回收问卷并复盘"
+      ],
+      "results": [
+        "到场率较上一届提升 25%"
+      ],
+      "ability_hypotheses": [
+        "活动执行",
+        "沟通协作"
+      ],
+      "verification_status": "verified",
+      "source_refs": [
+        "demo"
+      ],
+      "open_questions": []
+    }
+  ],
+  "star_statements": [
+    {
+      "id": "demo-star-1",
+      "experience_id": "demo-ecom",
+      "ability": "电商平台运营",
+      "situation": "店铺活动期",
+      "task": "维护商品信息并支撑大促",
+      "action": "维护 120 余个 SKU，核对活动价与库存，跟进 3 场大促报名",
+      "result": "活动期 GMV 由 80 万提升至 120 万，零错价",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "demo-star-2",
+      "experience_id": "demo-ecom",
+      "ability": "数据分析",
+      "situation": "日常运营复盘",
+      "task": "输出运营周报",
+      "action": "用 Excel 汇总 6 项指标，连续 12 周输出周报",
+      "result": "识别 2 款滞销款并替换，库存周转提升约 15%",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    },
+    {
+      "id": "demo-star-3",
+      "experience_id": "demo-campus",
+      "ability": "活动执行",
+      "situation": "校园招聘季",
+      "task": "组织宣讲会",
+      "action": "对接 3 家企业、统筹 12 名志愿者",
+      "result": "覆盖 600 余人，到场率提升 25%",
+      "source_refs": [
+        "demo"
+      ],
+      "status": "verified"
+    }
+  ],
+  "abilities": [
+    {
+      "id": "demo-ab-1",
+      "label": "电商平台运营",
+      "description": "店铺商品、活动与推广的日常运营",
+      "star_statement_refs": [
+        "demo-star-1"
+      ]
+    },
+    {
+      "id": "demo-ab-2",
+      "label": "数据分析",
+      "description": "指标汇总、周报与异常识别",
+      "star_statement_refs": [
+        "demo-star-2"
+      ]
+    },
+    {
+      "id": "demo-ab-3",
+      "label": "活动执行",
+      "description": "活动统筹、外部对接与现场执行",
+      "star_statement_refs": [
+        "demo-star-3"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "示例大学",
+      "major": "市场营销",
+      "degree": "本科",
+      "start_date": "2023-09",
+      "end_date": "2027-06",
+      "gpa": 3.8,
+      "gpa_scale": 4.0,
+      "rank": "前 15%",
+      "courses": [
+        {
+          "name": "市场调研",
+          "grade": "A"
+        },
+        {
+          "name": "消费者行为学",
+          "grade": "A"
+        },
+        {
+          "name": "统计学",
+          "grade": "B+"
+        }
+      ],
+      "note": "",
+      "english": [
+        {
+          "name": "CET-6",
+          "score": 540
+        }
+      ]
+    }
+  ],
+  "honors": [
+    {
+      "title": "校级二等奖学金",
+      "year": "2024-2025",
+      "level": "校级",
+      "detail": "前 15%"
+    },
+    {
+      "title": "优秀学生干部",
+      "year": "2024-2025",
+      "level": "校级",
+      "detail": ""
+    }
+  ],
+  "skills": [
+    {
+      "category": "办公软件",
+      "items": [
+        "Excel（数据透视表、VLOOKUP）"
+      ]
+    },
+    {
+      "category": "数据分析",
+      "items": [
+        "SQL 基础",
+        "Python 基础"
+      ]
+    }
+  ]
+}

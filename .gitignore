@@ -1,0 +1,26 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+venv/
+.env
+.env.local
+*.key
+*.egg-info/
+build/
+dist/
+
+# 本地测试依赖 / 缓存
+.testdeps/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 个人数据：知识库、原始材料、任务、照片、表达偏好（只忽略仓库根目录，examples/demo 不受影响）
+/data/
+
+# 简历成稿与分析
+/output/
+
+# 工具生成的临时目录
+.dsh-vision-router/

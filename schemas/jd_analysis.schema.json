@@ -1,0 +1,226 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JDAnalysis",
+  "description": "JD 解析结果：只描述岗位需求，不评价候选人，不生成简历内容。",
+  "type": "object",
+  "required": [
+    "job_title",
+    "job_goal",
+    "requirements",
+    "core_abilities"
+  ],
+  "properties": {
+    "job_title": {
+      "type": "string"
+    },
+    "job_goal": {
+      "type": "object",
+      "required": [
+        "mission"
+      ],
+      "properties": {
+        "mission": {
+          "type": "string",
+          "description": "岗位的核心使命，一句话"
+        },
+        "business_objects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deliverables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "work_type": {
+          "type": "string",
+          "description": "执行落地为主 / 分析决策为主 / 资源协调为主 / 业务拓展为主"
+        }
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "text",
+          "source_span",
+          "category",
+          "priority",
+          "priority_reason",
+          "source",
+          "confidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^R[0-9]+$"
+          },
+          "text": {
+            "type": "string",
+            "description": "要求的简洁表述"
+          },
+          "source_span": {
+            "type": "string",
+            "minLength": 4,
+            "description": "JD 原文片段，必须能在原文里原样找到"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "必备",
+              "优先",
+              "其他"
+            ]
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "P0",
+              "P1",
+              "P2"
+            ]
+          },
+          "priority_reason": {
+            "type": "string",
+            "description": "判断依据：引用了哪条 JD 文本、命中哪个信号"
+          },
+          "ability_id": {
+            "type": "string",
+            "description": "能力词表 id（config/abilities.yaml），不是知识库能力 id"
+          },
+          "ability_name": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "JD",
+              "推断"
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "高",
+              "中",
+              "低"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "能力",
+              "门槛",
+              "特质"
+            ],
+            "description": "能力=需要证据；门槛=学历/证书等硬条件；特质=沟通/学习/抗压等软性要求"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "能力"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "ability_id"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "core_abilities": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "ability_id",
+          "name",
+          "definition",
+          "requirement_ids",
+          "priority",
+          "priority_reason"
+        ],
+        "properties": {
+          "ability_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "definition": {
+            "type": "string",
+            "description": "这项能力在本岗位语境下的具体含义"
+          },
+          "requirement_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "P0",
+              "P1",
+              "P2"
+            ]
+          },
+          "priority_reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "implicit_requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "text",
+          "reason",
+          "confidence"
+        ],
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "高",
+              "中",
+              "低"
+            ]
+          }
+        }
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "JD 里确实没说的信息，不要猜"
+    }
+  }
+}
