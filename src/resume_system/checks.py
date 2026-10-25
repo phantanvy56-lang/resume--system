@@ -58,7 +58,16 @@ def check_thresholds(jd: dict, kb: dict, task: dict) -> list[dict]:
         status, reason = "未知", "知识库没有可核对的信息"
 
         need = max((rank for name, rank in _DEGREE_RANK.items() if name in text), default=0)
-        if need:
+
+        if "985" in text or "211" in text or "QS" in text:
+            degree_ok = highest >= need if need else False
+            status = "未知"
+            reason = (
+                f"学历{'满足' if degree_ok else '未满足'}，但知识库没有院校层次信息"
+                if need
+                else "知识库没有院校层次信息"
+            )
+        elif need:
             if highest >= need:
                 status, reason = "满足", f"最高学历 {highest_label}"
             else:
@@ -69,8 +78,17 @@ def check_thresholds(jd: dict, kb: dict, task: dict) -> list[dict]:
                 status, reason = "满足", hit
             else:
                 status, reason = "未知", "知识库没有 CET-6 成绩"
-        elif "985" in text or "211" in text or "QS" in text:
-            status, reason = "未知", "知识库没有院校层次信息"
+        else:
+            avail = (task.get("availability") or "").replace(" ", "")
+            day_m = re.search(r"每周\s*(\d+)\s*天", text)
+            month_m = re.search(r"(\d+)\s*个月", text)
+            if day_m or month_m:
+                ok_day = (not day_m) or (f"{day_m.group(1)}天" in avail)
+                ok_month = (not month_m) or (f"{month_m.group(1)}个月" in avail)
+                if ok_day and ok_month:
+                    status, reason = "满足", f"到岗时间：{task.get('availability', '')}"
+                else:
+                    status, reason = "未知", "需本人确认每周天数/实习时长"
 
         results.append(
             {

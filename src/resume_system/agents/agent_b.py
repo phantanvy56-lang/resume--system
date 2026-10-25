@@ -309,7 +309,7 @@ def _analysis_markdown(task: dict, payload: dict, warnings: list[dict] | None = 
         if task.get("threshold_checks"):
             lines.append(
                 "- 门槛核对：" + "；".join(
-                    f"{t.get('text', '')[:22]}：{t.get('status', '')}"
+                    (t.get('text', '')[:22] + ('…' if len(t.get('text', '')) > 22 else '')) + f"：{t.get('status', '')}"
                     for t in task["threshold_checks"]
                 )
             )
