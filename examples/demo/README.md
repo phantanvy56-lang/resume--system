@@ -20,12 +20,4 @@ python -m resume_system.export.docx_export --task demo-render --pdf --png
 
 产物在 `/tmp/demo_out/示例电商/电商运营实习生/`。
 
-## 用 demo 数据跑模型（可选）
-
-```bash
-export DEEPSEEK_API_KEY=...
-RESUME_DATA_DIR=examples/demo/data \
-python -m resume_system.jd_parse --jd examples/demo/jd.md
-```
-
 注意：demo 的 `preferences.json`、`profile_blocks.yaml` 都是示例值，换成你自己的数据前不要直接套用。

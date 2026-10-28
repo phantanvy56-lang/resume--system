@@ -1,4 +1,20 @@
 # 简历排版：改这里就能个性化，不用动代码。
+#
+# theme 从 themes 里选一个预设（finance / consulting / tech / minimal）；
+# 顶层其它字段会覆盖预设，用于局部微调。留空 "" 则完全用手写值。
+
+theme: finance
+
+themes:
+  finance:               # 金融/券商：稳重深蓝
+    colors: { accent: "#1F3864", text: "#222222" }
+  consulting:            # 咨询：极简黑
+    colors: { accent: "#000000", text: "#111111" }
+  tech:                  # 互联网/技术：清爽蓝
+    colors: { accent: "#1a73e8", text: "#24292f" }
+  minimal:               # 纯灰
+    colors: { accent: "#444444", text: "#333333" }
+
 page:
   width_cm: 21.0
   height_cm: 29.7
@@ -14,9 +30,10 @@ sizes:
   heading: 13.5
   body: 12
 
-colors:
-  heading: "#2F5597"       # 栏目标题蓝
-  text: "#000000"
+# 颜色由 theme 提供；想覆盖主题里某个颜色时取消注释（未写的仍用主题值）：
+# colors:
+#   accent: "#2F5597"      # 强调色：姓名 / 栏目标题 / 标题下划线
+#   text: "#222222"        # 正文颜色
 
 spacing:
   line_pt: 12.7            # 正文行距（精确值）
@@ -30,3 +47,11 @@ tabs:
 
 photo:
   height_cm: 3.0
+
+layout:
+  # 主区块顺序（header 固定最顶）；不出现的块不渲染
+  order: [education, sections, skills, abilities]   # 可选：education / sections / skills / abilities
+  show:
+    photo: true          # 顶部照片
+    availability: true   # 到岗时间
+    job_title: true      # 求职意向

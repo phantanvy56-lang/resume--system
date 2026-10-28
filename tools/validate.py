@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -53,6 +54,33 @@ def check_kb() -> list[str]:
         for ref in a.get("star_statement_refs", []):
             if ref not in star_ids:
                 errors.append(f"能力「{a.get('label')}」指向不存在的 STAR {ref}")
+
+    # —— 数据一致性 ——
+    # id 唯一
+    exp_list = [e.get("id") for e in kb.get("experiences", [])]
+    if len(exp_list) != len(set(exp_list)):
+        errors.append("experiences 的 id 有重复")
+    star_list = [s.get("id") for s in kb.get("star_statements", [])]
+    if len(star_list) != len(set(star_list)):
+        errors.append("star_statements 的 id 有重复")
+    ab_list = [a.get("id") for a in kb.get("abilities", [])]
+    if len(ab_list) != len(set(ab_list)):
+        errors.append("abilities 的 id 有重复")
+
+    # 日期格式（YYYY-MM）
+    for e in kb.get("experiences", []):
+        for k in ("start_date", "end_date"):
+            v = e.get(k)
+            if v and not re.match(r"^\d{4}-\d{2}$", str(v)):
+                errors.append(f"经历「{e.get('title')}」的 {k}「{v}」不是 YYYY-MM 格式")
+
+    # GPA 范围
+    for ed in kb.get("education", []):
+        gpa = ed.get("gpa")
+        if gpa is not None:
+            scale = ed.get("gpa_scale") or 5
+            if not (0 <= gpa <= scale):
+                errors.append(f"教育「{ed.get('school')}」的 GPA {gpa} 超出 0–{scale} 范围")
 
     orphan = [s.get("id") for s in kb.get("star_statements", []) if not s.get("experience_id")]
     if orphan:

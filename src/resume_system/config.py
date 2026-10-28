@@ -1,9 +1,18 @@
 from __future__ import annotations
 
+import logging
 import os
 from pathlib import Path
 
 import yaml
+
+
+def setup_logging() -> None:
+    """统一日志格式（幂等，只配置一次）；CLI 入口在 main() 里调用。"""
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
 
 # 项目根目录（src/resume_system/config.py 向上两级）
 ROOT = Path(__file__).resolve().parents[2]
@@ -26,10 +35,6 @@ def load_yaml(path: Path) -> dict:
         return yaml.safe_load(f) or {}
 
 
-def load_models_config() -> dict:
-    return load_yaml(ROOT / "config" / "models.yaml")
-
-
 def load_optional_text(rel_path: str) -> str:
     """读取 DATA_DIR 下的可选私有文件（不存在返回空串）。"""
     p = DATA_DIR / rel_path
@@ -40,10 +45,14 @@ DEFAULT_STYLE = {
     "page": {"width_cm": 21.0, "height_cm": 29.7, "margin_cm": 0.8},
     "fonts": {"heading": "微软雅黑", "body": "微软雅黑", "header": "宋体-简"},
     "sizes": {"name": 18, "heading": 13.5, "body": 12},
-    "colors": {"heading": "#2F5597", "text": "#000000"},
+    "colors": {"accent": "#2F5597", "text": "#222222"},
     "spacing": {"line_pt": 12.7, "bullet_gap_pt": 3.2, "entry_gap_pt": 8, "body_indent_pt": 15},
     "tabs": {"center_cm": 9.7, "right_cm": 19.4},
     "photo": {"height_cm": 3.0},
+    "layout": {
+        "order": ["education", "sections", "skills", "abilities"],   # 主区块顺序；不出现的块不渲染
+        "show": {"photo": True, "availability": True, "job_title": True},
+    },
 }
 
 
@@ -58,15 +67,31 @@ def _deep_merge(base: dict, override: dict) -> dict:
 
 
 def load_style() -> dict:
-    """排版配置（config/style.yaml），缺失项用默认值补齐。"""
+    """排版配置（config/style.yaml）：默认值 ← 主题预设 ← 顶层手写覆盖。
+
+    `theme` 选中 themes 里的预设；顶层其它字段覆盖预设（可局部微调）。
+    """
     p = ROOT / "config" / "style.yaml"
-    return _deep_merge(DEFAULT_STYLE, load_yaml(p) if p.exists() else {})
+    data = load_yaml(p) if p.exists() else {}
+    base = DEFAULT_STYLE
+    theme_name = data.get("theme")
+    theme = (data.get("themes") or {}).get(theme_name) if theme_name else None
+    if theme:
+        base = _deep_merge(DEFAULT_STYLE, theme)
+    override = {k: v for k, v in data.items() if k not in ("theme", "themes")}
+    return _deep_merge(base, override)
 
 
 def load_categories() -> list[dict]:
     """经历板块定义（config/categories.yaml），按 order 排序。"""
     data = load_yaml(ROOT / "config" / "categories.yaml")
     return sorted(data.get("categories", []), key=lambda c: c.get("order", 99))
+
+
+def load_abilities() -> list[dict]:
+    """能力词表（config/abilities.yaml）：JD 关键词覆盖检查等使用。"""
+    data = load_yaml(ROOT / "config" / "abilities.yaml")
+    return data.get("abilities", [])
 
 
 def load_profile_blocks() -> list[dict]:

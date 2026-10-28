@@ -10,10 +10,12 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import platform
 import re
 import shutil
 import subprocess
 import tempfile
+import unicodedata
 from pathlib import Path
 
 from docx import Document
@@ -30,7 +32,11 @@ _STYLE = load_style()
 FONT_HEI = _STYLE["fonts"]["heading"]
 FONT_FANGSONG = _STYLE["fonts"]["body"]
 FONT_HEADER = _STYLE["fonts"]["header"]
-HEADING_COLOR = RGBColor.from_string(_STYLE["colors"]["heading"].lstrip("#"))
+ACCENT_COLOR = RGBColor.from_string(_STYLE["colors"]["accent"].lstrip("#"))
+TEXT_COLOR = RGBColor.from_string(_STYLE["colors"]["text"].lstrip("#"))
+ACCENT_HEX = _STYLE["colors"]["accent"].lstrip("#")
+LAYOUT_ORDER = _STYLE["layout"]["order"]
+LAYOUT_SHOW = _STYLE["layout"]["show"]
 BASE_FONT = {
     "name": _STYLE["sizes"]["name"],
     "heading": _STYLE["sizes"]["heading"],
@@ -46,10 +52,14 @@ PAGE = _STYLE["page"]
 PHOTO_HEIGHT_CM = _STYLE["photo"]["height_cm"]
 PNG_DPI = 200
 
-SOFFICE = shutil.which("soffice") or "/Applications/LibreOffice.app/Contents/MacOS/soffice"
 MUTOOL = shutil.which("mutool")
 PDFTOPPM = shutil.which("pdftoppm")
 LO_PROFILE = Path(tempfile.gettempdir()) / "resume_system_lo_profile"
+
+# —— 单页估算（纯 Python，不依赖 LibreOffice）——
+_CM_PT = 28.3464567          # 1 cm = 28.346… pt（与 python-docx 的 Cm 口径一致）
+_SINGLE_LINE_FACTOR = 1.93   # 微软雅黑「单倍行距」实测值（LibreOffice 渲染校准；换字体需重测）
+_FIT_MARGIN_LINES = 3.0      # 安全余量（行）：宁可多删一条字条，也不翻到第 2 页
 
 JOBS_DIR = DATA_DIR / "jobs"
 KB_PATH = DATA_DIR / "knowledge_base" / "knowledge_base.json"
@@ -62,12 +72,13 @@ def _set_run(run, font: str, size: float, bold: bool = False, color: RGBColor | 
     run.font.name = font
     run.font.size = Pt(size)
     run.bold = bold
-    run.font.color.rgb = color or RGBColor(0, 0, 0)
+    run.font.color.rgb = color or TEXT_COLOR
     rpr = run._element.get_or_add_rPr()
     rpr.get_or_add_rFonts().set(qn("w:eastAsia"), font)
 
 
-def _add_bottom_border(paragraph, color: str = "2F5597") -> None:
+def _add_bottom_border(paragraph, color: str | None = None) -> None:
+    color = color or ACCENT_HEX
     pPr = paragraph._element.get_or_add_pPr()
     pBdr = OxmlElement("w:pBdr")
     bottom = OxmlElement("w:bottom")
@@ -118,20 +129,20 @@ def _heading(doc, text: str) -> None:
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(6)
     p.paragraph_format.space_after = Pt(3)
-    _set_run(p.add_run(text), FONT_HEI, BASE_FONT["heading"], bold=True, color=HEADING_COLOR)
+    _set_run(p.add_run(text), FONT_HEI, BASE_FONT["heading"], bold=True, color=ACCENT_COLOR)
     _add_bottom_border(p)
 
 
 # --------------------------------------------------------------------------- #
 # 各区块
 # --------------------------------------------------------------------------- #
-def _header_lines(container, profile: dict, header: dict) -> None:
+def _header_lines(container, profile: dict, header: dict, show: dict) -> None:
     name_size, body_size = BASE_FONT["name"], BASE_FONT["body"]
     contact = " | ".join(x for x in [profile.get("phone", ""), profile.get("email", "")] if x)
 
     p = container.paragraphs[0] if container.paragraphs else container.add_paragraph()
     p.paragraph_format.space_after = Pt(0)
-    _set_run(p.add_run(profile.get("name", "")), FONT_HEADER, name_size, bold=True)
+    _set_run(p.add_run(profile.get("name", "")), FONT_HEADER, name_size, bold=True, color=ACCENT_COLOR)
 
     def add_line():
         q = container.add_paragraph()
@@ -142,29 +153,31 @@ def _header_lines(container, profile: dict, header: dict) -> None:
     if contact:
         _set_run(add_line().add_run(contact), FONT_HEADER, body_size)
 
-    availability = (header.get("availability") or "").strip()
-    if availability:
-        head, tail = _split_first_clause(availability)
-        q = add_line()
-        _set_run(q.add_run("到岗时间："), FONT_HEADER, body_size)
-        _set_run(q.add_run(head), FONT_HEADER, body_size, bold=True)
-        if tail:
-            _set_run(q.add_run(tail), FONT_HEADER, body_size)
+    if show.get("availability", True):
+        availability = (header.get("availability") or "").strip()
+        if availability:
+            head, tail = _split_first_clause(availability)
+            q = add_line()
+            _set_run(q.add_run("到岗时间："), FONT_HEADER, body_size)
+            _set_run(q.add_run(head), FONT_HEADER, body_size, bold=True)
+            if tail:
+                _set_run(q.add_run(tail), FONT_HEADER, body_size)
 
-    job = (header.get("job_title") or "").strip()
-    if job:
-        q = add_line()
-        _set_run(q.add_run(f"求职意向：{job}"), FONT_HEADER, body_size)
+    if show.get("job_title", True):
+        job = (header.get("job_title") or "").strip()
+        if job:
+            q = add_line()
+            _set_run(q.add_run(f"求职意向：{job}"), FONT_HEADER, body_size)
 
 
-def _write_header(doc, profile: dict, header: dict) -> None:
+def _write_header(doc, profile: dict, header: dict, show: dict) -> None:
     photo_path = None
-    if profile.get("photo"):
+    if show.get("photo", True) and profile.get("photo"):
         p = ROOT / profile["photo"]
         photo_path = p if p.exists() else None
 
     if not photo_path:
-        _header_lines(doc, profile, header)
+        _header_lines(doc, profile, header, show)
         return
 
     table = doc.add_table(rows=1, cols=2)
@@ -180,7 +193,7 @@ def _write_header(doc, profile: dict, header: dict) -> None:
         vAlign.set(qn("w:val"), "top")
         tcPr.append(vAlign)
 
-    _header_lines(left, profile, header)
+    _header_lines(left, profile, header, show)
     p = right.paragraphs[0]
     p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     p.add_run().add_picture(str(photo_path), height=Cm(PHOTO_HEIGHT_CM))
@@ -282,6 +295,18 @@ def _write_abilities(doc, abilities: list[dict]) -> None:
         _add_bold_runs(p, ab.get("text", ""), ab.get("bold", []), FONT_FANGSONG, body_size)
 
 
+def _write_skills(doc, skills: list[str]) -> None:
+    if not skills:
+        return
+    _heading(doc, "技能")
+    body_size = BASE_FONT["body"]
+    p = doc.add_paragraph()
+    p.paragraph_format.space_after = Pt(0)
+    p.paragraph_format.line_spacing = Pt(LINE_SPACING_PT)
+    p.paragraph_format.left_indent = Pt(BODY_INDENT_PT)
+    _set_run(p.add_run(" · ".join(skills)), FONT_FANGSONG, body_size)
+
+
 def _render_resume(resume: dict, profile: dict, output_path: Path, kb_index: dict) -> None:
     doc = Document()
     section = doc.sections[0]
@@ -292,10 +317,16 @@ def _render_resume(resume: dict, profile: dict, output_path: Path, kb_index: dic
     section.top_margin = Cm(PAGE["margin_cm"])
     section.bottom_margin = Cm(PAGE["margin_cm"])
 
-    _write_header(doc, profile, resume.get("header", {}))
-    _write_education(doc, resume.get("education", {}))
-    _write_sections(doc, resume.get("sections", []), kb_index)
-    _write_abilities(doc, resume.get("abilities", []))
+    _write_header(doc, profile, resume.get("header", {}), LAYOUT_SHOW)
+
+    _blocks = {
+        "education": lambda: _write_education(doc, resume.get("education", {})),
+        "sections": lambda: _write_sections(doc, resume.get("sections", []), kb_index),
+        "skills": lambda: _write_skills(doc, resume.get("skills", [])),
+        "abilities": lambda: _write_abilities(doc, resume.get("abilities", [])),
+    }
+    for block in LAYOUT_ORDER:
+        _blocks.get(block, lambda: None)()
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     doc.save(str(output_path))
@@ -304,15 +335,139 @@ def _render_resume(resume: dict, profile: dict, output_path: Path, kb_index: dic
 # --------------------------------------------------------------------------- #
 # 单页适配
 # --------------------------------------------------------------------------- #
-def _all_units(resume: dict, rank: dict[str, int]) -> list[tuple[str, int]]:
-    """按「相关度低 → 高、同段从后往前」排出可删单位。"""
-    exps = [exp for sec in resume.get("sections", []) for exp in sec.get("experiences", [])]
-    exps.sort(key=lambda e: rank.get(e.get("experience_id", ""), 999), reverse=True)
-    units: list[tuple[str, int]] = []
-    for exp in exps:
-        for i in range(len(exp.get("bullets", [])) - 1, -1, -1):
-            units.append((exp.get("experience_id", ""), i))
-    return units
+def _char_width(ch: str, size: float) -> float:
+    """字符宽度估算：CJK 全角 = 1em，其余按 0.6em（不加载字体，零依赖）。"""
+    if unicodedata.east_asian_width(ch) in ("W", "F"):
+        return size
+    return 0.6 * size
+
+
+def _wrap_lines(text: str, width: float, size: float) -> int:
+    """逐字符贪心折行，返回视觉行数。"""
+    lines = 0
+    cur = 0.0
+    for ch in text:
+        w = _char_width(ch, size)
+        if cur + w > width and cur > 0:
+            lines += 1
+            cur = w
+        else:
+            cur += w
+    return max(1, lines + (1 if cur > 0 else 0))
+
+
+def _para_height(text: str, width: float, size: float, exact: float | None = None) -> float:
+    """一段文本的总高度：视觉行数 × 行距（未指定 exact 时用单倍行距）。"""
+    lh = exact if exact is not None else size * _SINGLE_LINE_FACTOR
+    return _wrap_lines(text, width, size) * lh
+
+
+def _content_height_pt() -> float:
+    return (PAGE["height_cm"] - 2 * PAGE["margin_cm"]) * _CM_PT
+
+
+def _header_height(resume: dict, profile: dict, full_w: float, body: float) -> float:
+    """顶部信息框高度（姓名 + 联系方式 + 可选到岗/意向 + 可选照片）。"""
+    header = resume.get("header", {})
+    h = 0.0
+    photo_path = None
+    if LAYOUT_SHOW.get("photo", True) and profile.get("photo"):
+        p = ROOT / profile["photo"]
+        photo_path = p if p.exists() else None
+    hw = 15.0 * _CM_PT if photo_path else full_w
+
+    if profile.get("name"):
+        h += _para_height(profile["name"], hw, BASE_FONT["name"])
+    contact = " | ".join(x for x in [profile.get("phone", ""), profile.get("email", "")] if x)
+    if contact:
+        h += _para_height(contact, hw, body, exact=LINE_SPACING_PT)
+    if LAYOUT_SHOW.get("availability", True):
+        avail = (header.get("availability") or "").strip()
+        if avail:
+            h += _para_height("到岗时间：" + avail, hw, body, exact=LINE_SPACING_PT)
+    if LAYOUT_SHOW.get("job_title", True):
+        job = (header.get("job_title") or "").strip()
+        if job:
+            h += _para_height("求职意向：" + job, hw, body, exact=LINE_SPACING_PT)
+    if photo_path:
+        h = max(h, PHOTO_HEIGHT_CM * _CM_PT)
+    return h
+
+
+def _education_height(resume: dict, full_w: float, ind_w: float, body: float) -> float:
+    h = _para_height("教育背景", full_w, BASE_FONT["heading"]) + 9
+    for s in resume.get("education", {}).get("schools", []):
+        t = _edu_time(s)
+        if s.get("note"):
+            t = f"{t}（{s['note']}）"
+        degree = f"（{s['degree']}）" if s.get("degree") else ""
+        line = f"{t}  {s.get('school', '')}  {s.get('college', '')}{degree}"
+        h += _para_height(line, full_w, body, exact=LINE_SPACING_PT)
+    for f in resume.get("education", {}).get("fields", []):
+        h += _para_height(f"{f.get('label', '')}：" + f.get("text", ""), ind_w, body, exact=LINE_SPACING_PT)
+    return h
+
+
+def _sections_height(resume: dict, kb_index: dict, full_w: float, ind_w: float, body: float) -> float:
+    h = 0.0
+    for sec in resume.get("sections", []):
+        if not sec.get("experiences"):
+            continue
+        h += _para_height(sec.get("title", ""), full_w, BASE_FONT["heading"]) + 9
+        first = True
+        for exp in sec["experiences"]:
+            if not exp.get("bullets"):
+                continue
+            time_str, name, role = _project_parts(exp, kb_index)
+            proj = "｜".join(x for x in (time_str, name, role) if x)
+            if not first:
+                h += ENTRY_GAP_PT
+            first = False
+            h += _para_height(proj, full_w, body, exact=LINE_SPACING_PT)
+            for b in exp["bullets"]:
+                h += BULLET_GAP_PT
+                h += _para_height(f"{b.get('label', '')}：" + b.get("desc", ""), ind_w, body, exact=LINE_SPACING_PT)
+    return h
+
+
+def _abilities_height(resume: dict, full_w: float, ind_w: float, body: float) -> float:
+    h = _para_height("个人能力", full_w, BASE_FONT["heading"]) + 9
+    for ab in resume.get("abilities", []):
+        h += BULLET_GAP_PT
+        h += _para_height(f"{ab.get('label', '')}：" + ab.get("text", ""), ind_w, body, exact=LINE_SPACING_PT)
+    return h
+
+
+def _skills_height(resume: dict, full_w: float, ind_w: float, body: float) -> float:
+    skills = resume.get("skills", [])
+    if not skills:
+        return 0.0
+    h = _para_height("技能", full_w, BASE_FONT["heading"]) + 9
+    h += _para_height(" · ".join(skills), ind_w, body, exact=LINE_SPACING_PT)
+    return h
+
+
+def _estimated_height(resume: dict, profile: dict, kb_index: dict) -> float:
+    """按渲染器版式规则估算整份简历高度（pt），与 _render_resume 保持同构（含 layout.order / show）。"""
+    full_w = (PAGE["width_cm"] - 2 * PAGE["margin_cm"]) * _CM_PT
+    ind_w = full_w - BODY_INDENT_PT
+    body = BASE_FONT["body"]
+
+    h = _header_height(resume, profile, full_w, body)
+    blocks = {
+        "education": lambda: _education_height(resume, full_w, ind_w, body),
+        "sections": lambda: _sections_height(resume, kb_index, full_w, ind_w, body),
+        "skills": lambda: _skills_height(resume, full_w, ind_w, body),
+        "abilities": lambda: _abilities_height(resume, full_w, ind_w, body),
+    }
+    for block in LAYOUT_ORDER:
+        h += blocks.get(block, lambda: 0.0)()
+    return h
+
+
+def _fits_one_page(resume: dict, profile: dict, kb_index: dict) -> bool:
+    """估算是否放得下 1 页（含安全余量）。"""
+    return _estimated_height(resume, profile, kb_index) + _FIT_MARGIN_LINES * LINE_SPACING_PT <= _content_height_pt()
 
 
 def _view(resume: dict, removed: set[tuple[str, int]]) -> dict:
@@ -334,13 +489,6 @@ def _view(resume: dict, removed: set[tuple[str, int]]) -> dict:
             sections.append(sec)
     out["sections"] = sections
     return out
-
-
-def _pages(resume: dict, profile: dict, kb_index: dict, tmp: Path) -> int:
-    tmp_docx = tmp / "fit.docx"
-    _render_resume(resume, profile, tmp_docx, kb_index)
-    pdf = _docx_to_pdf(tmp_docx, tmp)
-    return len(PdfReader(str(pdf)).pages)
 
 
 def _pick_unit(
@@ -368,45 +516,81 @@ def _pick_unit(
 
 
 def _fit_to_one_page(resume: dict, rank: dict[str, int], profile: dict, kb_index: dict) -> dict:
+    """按相关度删字条直到估算 ≤ 1 页，再回填；纯估算，不调用 LibreOffice。"""
     removed: set[tuple[str, int]] = set()
     order: list[tuple[str, int]] = []
 
-    with tempfile.TemporaryDirectory() as tmpdir:
-        tmp = Path(tmpdir)
-        while True:
-            if _pages(_view(resume, removed), profile, kb_index, tmp) <= 1:
-                break
-            nxt = _pick_unit(resume, rank, removed)
-            if nxt is None:
-                print("[提示] 已删到无可删，仍超一页，请手动处理。")
-                break
-            removed.add(nxt)
-            order.append(nxt)
+    while True:
+        if _fits_one_page(_view(resume, removed), profile, kb_index):
+            break
+        nxt = _pick_unit(resume, rank, removed)
+        if nxt is None:
+            print("[提示] 已删到无可删，仍超一页，请手动处理。")
+            break
+        removed.add(nxt)
+        order.append(nxt)
 
-        added = 0
-        for u in reversed(order):
-            removed.discard(u)
-            if _pages(_view(resume, removed), profile, kb_index, tmp) > 1:
-                removed.add(u)
-            else:
-                added += 1
+    added = 0
+    for u in reversed(order):
+        removed.discard(u)
+        if not _fits_one_page(_view(resume, removed), profile, kb_index):
+            removed.add(u)
+        else:
+            added += 1
 
     if order:
         msg = f"[适配] 为压到 1 页，删掉 {len(order)} 条字条"
         if added:
             msg += f"，回填 {added} 条"
-        print(msg + "。")
+        print(msg + "（估算，无需 LibreOffice）。")
     return _view(resume, removed)
 
 
 # --------------------------------------------------------------------------- #
 # PDF / PNG 导出
 # --------------------------------------------------------------------------- #
+def find_soffice() -> str | None:
+    """定位 soffice 可执行文件；找不到返回 None（只出 docx 时无需 LibreOffice）。"""
+    p = shutil.which("soffice")
+    if p:
+        return p
+    system = platform.system()
+    if system == "Darwin":
+        p = "/Applications/LibreOffice.app/Contents/MacOS/soffice"
+        return p if Path(p).exists() else None
+    if system == "Windows":
+        for p in (
+            r"C:\Program Files\LibreOffice\program\soffice.exe",
+            r"C:\Program Files (x86)\LibreOffice\program\soffice.exe",
+        ):
+            if Path(p).exists():
+                return p
+    return None
+
+
+def _require_soffice() -> str:
+    """返回 soffice 路径；找不到则给出按操作系统的安装提示并退出。"""
+    p = find_soffice()
+    if p:
+        return p
+    cmd = {
+        "Darwin": "brew install --cask libreoffice",
+        "Linux": "sudo apt install libreoffice",
+        "Windows": "从 https://www.libreoffice.org/download 下载安装",
+    }.get(platform.system(), "安装 LibreOffice 后重试")
+    raise SystemExit(
+        f"导出 PDF/PNG 需要 LibreOffice，但未检测到。\n"
+        f"请先安装：{cmd}\n"
+        f"（只导出 docx 不需要 LibreOffice，去掉 --pdf/--png 即可）"
+    )
+
+
 def _docx_to_pdf(docx_path: Path, out_dir: Path) -> Path:
+    soffice = _require_soffice()
     LO_PROFILE.mkdir(parents=True, exist_ok=True)
     subprocess.run(
         [
-            SOFFICE,
+            soffice,
             f"-env:UserInstallation=file://{LO_PROFILE}",
             "--headless",
             "--convert-to",
@@ -462,7 +646,7 @@ def render_resume_from_task(
         files = sorted(JOBS_DIR.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
         task_file = files[0] if files else None
     if not task_file or not task_file.exists():
-        raise FileNotFoundError("未找到任务文件，请先跑 agent_b 生成简历")
+        raise FileNotFoundError("未找到任务文件，请先按 docs/agent_usage.md 生成简历 JSON")
 
     task = json.loads(task_file.read_text(encoding="utf-8"))
     version = task["versions"][-1]
@@ -489,21 +673,30 @@ def render_resume_from_task(
     out_dir.mkdir(parents=True, exist_ok=True)
     output = output_path or (out_dir / f"{output_stem(task)}.docx")
 
+    # 分析稿跟着渲染一起落盘：任务改名/改公司后，md 路径也随之更新，避免只剩 docx 没有分析稿
+    md_text = version.get("analysis_md")
+    if md_text:
+        (out_dir / f"{output_stem(task)}_分析.md").write_text(md_text, encoding="utf-8")
+
     fitted = _fit_to_one_page(resume, rank, profile, kb_index)
     _render_resume(fitted, profile, output, kb_index)
 
-    with tempfile.TemporaryDirectory() as tmp:
-        pdf_path = _docx_to_pdf(output, Path(tmp))
-        pages = len(PdfReader(str(pdf_path)).pages)
-        if pages > 1:
-            print(f"[警告] 简历 {pages} 页，超过一页，请自行删减内容。")
-        if export_pdf:
-            final_pdf = output.with_suffix(".pdf")
-            shutil.copyfile(pdf_path, final_pdf)
-            print(f"[完成] 已生成 {final_pdf.name}")
-        if export_png:
-            for p in _pdf_to_png(pdf_path, output.with_suffix(""), dpi):
-                print(f"[完成] 已生成 {p.name}")
+    need_pdf = export_pdf or export_png
+    # 只有要出 PDF/PNG，或本机装了 LibreOffice（用于精确数页）时才转 PDF；
+    # 只出 docx 时不再依赖 LibreOffice。
+    if need_pdf or find_soffice() is not None:
+        with tempfile.TemporaryDirectory() as tmp:
+            pdf_path = _docx_to_pdf(output, Path(tmp))  # 缺 LibreOffice 会给出安装提示
+            pages = len(PdfReader(str(pdf_path)).pages)
+            if pages > 1:
+                print(f"[警告] 简历 {pages} 页，超过一页，请自行删减内容。")
+            if export_pdf:
+                final_pdf = output.with_suffix(".pdf")
+                shutil.copyfile(pdf_path, final_pdf)
+                print(f"[完成] 已生成 {final_pdf.name}")
+            if export_png:
+                for p in _pdf_to_png(pdf_path, output.with_suffix(""), dpi):
+                    print(f"[完成] 已生成 {p.name}")
 
     print(
         f"[完成] 已生成 {output}（姓名 {BASE_FONT['name']}pt / 标题 {BASE_FONT['heading']}pt / 正文 {BASE_FONT['body']}pt）"

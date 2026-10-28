@@ -8,7 +8,6 @@ version = "0.1.0"
 description = "个人AI简历系统：经历探索(A) + 岗位分析(B)，数据与模型解耦，可更换大模型"
 requires-python = ">=3.10"
 dependencies = [
-    "openai>=1.40.0,<2",
     "PyYAML>=6.0",
     "jsonschema>=4.20.0",
     "python-docx>=1.1.0",

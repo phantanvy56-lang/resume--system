@@ -13,6 +13,5 @@
 4. **数据与工具解耦**：不把关键记忆存进任何模型/工具的隐式记忆，只存文件。
 5. **反馈分类沉淀**：区分「事实补充 / 通用表达偏好 / 岗位专属修改 / 系统规则变更」，不把局部修改固化为全局规则。
 
-## 换模型
-只改 `config/models.yaml` 和 `src/resume_system/llm/`（新增适配器 + 在 factory.py 注册）。
-不要动 `agents/`、`tools/`、`data/`——它们只依赖 `llm/base.py` 的接口。
+## 用什么模型
+本仓库不内置模型调用、不需要 API key。A / B 的"动脑"由维护者自己的 agent / 模型完成，按 `docs/agent_usage.md` 的流程产出 JSON，再跑 `python tools/validate.py` 校验。

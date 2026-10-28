@@ -165,7 +165,6 @@ FINANCE = {
             {"requirement": "行业与公司基础数据整理", "ability_id": "fin-ab-2", "ability_label": "行业研究", "star_statement_ids": ["fin-star-2"], "match_level": "强", "reason": "维护 200+ 条行业数据库并撰写跟踪报告"},
             {"requirement": "协助基本面研究", "ability_id": "fin-ab-2", "ability_label": "行业研究", "star_statement_ids": ["fin-star-3"], "match_level": "中", "reason": "通过 10 场专家访谈支撑赛道复盘"},
         ],
-        "greeting": "您好，示例财经大学金融学硕士在读；每周可到岗 4 天、可连续实习 3 个月以上。\n岗位要的财务分析与估值、行业研究、数据整理，这三块我都在实习里做过。\n简历发您，方便的话看一眼，感谢！",
     },
     "sources": SOURCES["finance"],
 }
@@ -256,7 +255,6 @@ CONSULTING = {
             {"requirement": "桌面研究与访谈", "ability_id": "con-ab-2", "ability_label": "访谈与桌面研究", "star_statement_ids": ["con-star-2"], "match_level": "强", "reason": "30 份桌面研究、12 场访谈纪要"},
             {"requirement": "中英文汇报", "ability_id": "con-ab-3", "ability_label": "汇报呈现", "star_statement_ids": ["con-star-3"], "match_level": "强", "reason": "15 页英文案例汇报获校赛冠军"},
         ],
-        "greeting": "您好，示例大学管理学本科在读；每周可到岗 3 天、可连续实习 12 周以上。\n岗位要的结构化拆解、桌面研究与访谈、中英文汇报，这三块我都在 PTA 和案例竞赛里做过。\n简历发您，方便的话看一眼，感谢！",
     },
     "sources": SOURCES["consulting"],
 }
@@ -346,7 +344,6 @@ DATA = {
             {"requirement": "风控策略制定与优化", "ability_id": "data-ab-2", "ability_label": "统计建模", "star_statement_ids": ["data-star-2"], "match_level": "强", "reason": "设计 AB 测试并验证策略效果"},
             {"requirement": "指标监控与异常解读", "ability_id": "data-ab-3", "ability_label": "业务分析", "star_statement_ids": ["data-star-2"], "match_level": "中", "reason": "从指标异常出发做归因并输出复盘"},
         ],
-        "greeting": "您好，示例大学统计学硕士在读；每周可到岗 4 天、可连续实习 3 个月以上。\n岗位要的 SQL 与指标、AB 测试、异常归因，这三块我都在保险科技实习里做过。\n简历发您，方便的话看一眼，感谢！",
     },
     "sources": SOURCES["data"],
 }
@@ -437,7 +434,6 @@ LAW = {
             {"requirement": "法律检索与备忘录", "ability_id": "law-ab-2", "ability_label": "法律检索", "star_statement_ids": ["law-star-2"], "match_level": "强", "reason": "30 次检索、5 份备忘录"},
             {"requirement": "广告合规与客诉", "ability_id": "law-ab-3", "ability_label": "合规与沟通", "star_statement_ids": ["law-star-3"], "match_level": "强", "reason": "审核 20 份宣传规则并处理 15 件客诉"},
         ],
-        "greeting": "您好，示例大学法学硕士在读，已取得法律职业资格 A 证；每周可到岗 4 天、可连续实习 6 个月以上。\n岗位要的中英文合同审阅、法律检索、广告合规，这三块我都在律所和公司法务实习里做过。\n简历发您，方便的话看一眼，感谢！",
     },
     "sources": SOURCES["law"],
 }

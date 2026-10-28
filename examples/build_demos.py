@@ -94,7 +94,6 @@ def _task(spec: dict, resume: dict) -> dict:
         "selected_experience_ids": [e["id"] for e in spec["experiences"]],
         "experience_rank": [{"experience_id": e["id"], "rank": i + 1} for i, e in enumerate(spec["experiences"])],
         "gaps": [],
-        "greeting": spec["job"]["greeting"],
         "preferences": {},
         "status": "draft",
         "versions": [

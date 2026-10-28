@@ -42,7 +42,10 @@ def _highest_degree(kb: dict) -> tuple[int, str]:
 
 
 def check_thresholds(jd: dict, kb: dict, task: dict) -> list[dict]:
-    """核对门槛类要求（学历 / 语言 / 院校层次），给满足/不满足/未知。"""
+    """核对门槛类要求（学历 / 语言 / 到岗时长），给满足/不满足/未知。
+
+    院校层次（985/211/QS）暂不支持：知识库没有院校层次字段，统一返回「未知」。
+    """
     results: list[dict] = []
     highest, highest_label = _highest_degree(kb)
     english = [

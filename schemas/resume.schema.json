@@ -88,6 +88,11 @@
           "bold": { "type": "array", "items": { "type": "string" } }
         }
       }
+    },
+    "skills": {
+      "type": "array",
+      "description": "硬技能标签（如 Excel / SQL / Stata / Wind），渲染成一行标签",
+      "items": { "type": "string" }
     }
   }
 }
