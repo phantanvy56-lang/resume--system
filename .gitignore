@@ -34,3 +34,6 @@ config/models.yaml
 # 私有 CLI 的数据访问 / 工具层（公开仓库走"agent 直接写 JSON"，用不到）
 src/resume_system/storage/
 src/resume_system/tools/
+
+# 私有发布脚本（不随公开仓库）
+sync-public.sh
