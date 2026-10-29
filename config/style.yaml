@@ -6,8 +6,8 @@
 theme: finance
 
 themes:
-  finance:               # 金融/券商：稳重深蓝
-    colors: { accent: "#1F3864", text: "#222222" }
+  finance:               # 默认：蓝色（#2F5597）
+    colors: { accent: "#2F5597", text: "#222222" }
   consulting:            # 咨询：极简黑
     colors: { accent: "#000000", text: "#111111" }
   tech:                  # 互联网/技术：清爽蓝
