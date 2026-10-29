@@ -1,4 +1,4 @@
-"""JD 关键词覆盖检查：JD 里出现的能力关键词，简历正文是否都覆盖到。零 key，不调模型。
+"""JD 关键词覆盖检查：JD 里出现的能力关键词，简历正文是否都覆盖到。不调模型。
 
 用法：
     python -m resume_system.keyword_check --task <任务id>
@@ -59,7 +59,7 @@ def _latest_task() -> dict:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="JD 关键词覆盖检查（零 key，不调模型）")
+    parser = argparse.ArgumentParser(description="JD 关键词覆盖检查（不调模型）")
     parser.add_argument("--task", help="任务 id（默认最新任务）")
     args = parser.parse_args()
 

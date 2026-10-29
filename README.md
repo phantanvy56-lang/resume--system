@@ -4,7 +4,7 @@
 
 **把经历，变成一份能投的简历。**
 
-> 本仓库不包含模型调用代码，也不需要配置 API key：整理经历、匹配岗位、写简历这些"动脑"的事，由你自己的 AI 助手（Claude Code / Cursor / …）完成；本仓库提供结构、校验和排版。
+> 整理经历、匹配岗位、写简历这些"动脑"的事，由你自己的 AI 助手（Claude Code / Cursor / …）完成；本仓库提供结构、校验和排版。
 
 ## 你可能有这些烦恼
 
@@ -40,7 +40,7 @@
 
 ## 怎么开始
 
-**方式一：用你已有的 AI 助手（推荐，零 key）**
+**方式一：用你已有的 AI 助手（推荐）**
 
 1. 把材料放进 `data/raw/`，或让工具帮你把 docx/pdf 转成文字：`python tools/ingest.py 材料.docx`
 2. 用你平时用的 AI 助手，按 `schemas/` 和 `docs/` 把经历整理进经历库
@@ -93,7 +93,7 @@ pytest -q
 
 导出 PDF/PNG 需要 LibreOffice（`soffice`），PNG 还需要 `mutool` 或 `pdftoppm`；只出 docx 不需要。
 
-## 校验 / 查重（零 key）
+## 校验 / 查重
 
 ```bash
 # 改完 data/ 后必跑：schema + 跨文件引用 + 任务引用 + resume_json
@@ -142,7 +142,7 @@ CI 见 `.github/workflows/tests.yml`，不依赖模型和 LibreOffice（渲染�
 
 | 文件 | 作用 |
 |---|---|
-| `docs/agent_usage.md` | **给 agent 的零 key 完整流程** |
+| `docs/agent_usage.md` | **给 agent 的完整流程** |
 | `docs/architecture.md` | 架构与数据流 |
 | `docs/layout_spec.md` | 排版规范（栏目、字体、字号、顺序） |
 | `docs/style_rules.md` | 简历字条语言规则（抽象版，无真实案例） |

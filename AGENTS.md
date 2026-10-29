@@ -14,4 +14,4 @@
 5. **反馈分类沉淀**：区分「事实补充 / 通用表达偏好 / 岗位专属修改 / 系统规则变更」，不把局部修改固化为全局规则。
 
 ## 用什么模型
-本仓库不内置模型调用、不需要 API key。A / B 的"动脑"由维护者自己的 agent / 模型完成，按 `docs/agent_usage.md` 的流程产出 JSON，再跑 `python tools/validate.py` 校验。
+本仓库不内置模型调用。A / B 的"动脑"由维护者自己的 agent / 模型完成，按 `docs/agent_usage.md` 的流程产出 JSON，再跑 `python tools/validate.py` 校验。

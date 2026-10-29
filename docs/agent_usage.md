@@ -1,8 +1,8 @@
-# Agent 用法（零 API key）
+# Agent 用法
 
 本文写给**已经在用 AI agent 的人**（Claude Code、Cursor、DSH 等），或想用自己的模型跑通这条流程的人。
 
-核心原则：**这条流程不需要你配置任何模型 API key**。真正"动脑"的两步——A 提取经历、B 生成简历——由你自己的 agent / 模型完成；本仓库只提供**骨架（schema）+ 校验器 + 渲染器**，这些是纯 Python，零 key。
+核心原则：真正"动脑"的两步——A 提取经历、B 生成简历——由你自己的 agent / 模型完成；本仓库只提供**骨架（schema）+ 校验器 + 渲染器**，这些是纯 Python。
 
 ## 谁做哪部分
 
@@ -26,7 +26,7 @@
 ### 0. 准备原始材料
 
 ```bash
-python tools/ingest.py 材料.docx 材料.pdf   # 抽成纯文本进 data/raw/（零 key）
+python tools/ingest.py 材料.docx 材料.pdf   # 抽成纯文本进 data/raw/
 ```
 
 ### 1. A：提取经历 → 知识库
@@ -67,7 +67,7 @@ python tools/validate.py
 ### 3. 自检 + 渲染
 
 ```bash
-python -m resume_system.review --task <任务id>   # 字条重合检查（零 key）
+python -m resume_system.review --task <任务id>   # 字条重合检查
 
 RESUME_OUTPUT_DIR=/tmp/out \
 python -m resume_system.export.docx_export --task <任务id> --pdf --png

@@ -1,6 +1,6 @@
 # resume-system
 
-A small, data-first resume pipeline with **zero API-key dependency**. The "thinking" steps (A: extract experiences, B: generate the resume) are done by your own AI agent (Claude Code / Cursor / …); this repo provides the JSON schemas, a validator, and a renderer — all pure Python, no model calls, no API key.
+A small, data-first resume pipeline. The "thinking" steps (A: extract experiences, B: generate the resume) are done by your own AI agent (Claude Code / Cursor / …); this repo provides the JSON schemas, a validator, and a renderer — all pure Python, no model calls.
 
 - **A (explore)**: extract facts / STAR evidence from raw materials → knowledge base JSON
 - **B (generate)**: parse a JD, match evidence, write a structured resume (JSON)
@@ -8,7 +8,7 @@ A small, data-first resume pipeline with **zero API-key dependency**. The "think
 
 Facts and wording are separated: the knowledge base stores what happened, each job task stores how it was expressed.
 
-## Quickstart (zero key)
+## Quickstart
 
 Full agent workflow: [docs/agent_usage.md](docs/agent_usage.md).
 

@@ -25,7 +25,7 @@ htmlcov/
 # 工具生成的临时目录
 .dsh-vision-router/
 
-# 一键自动化 CLI（需要模型 API key；私有保留，不进公开仓库）
+# 一键自动化 CLI（需要模型调用；私有保留，不进公开仓库）
 src/resume_system/agents/
 src/resume_system/llm/
 src/resume_system/jd_parse.py
